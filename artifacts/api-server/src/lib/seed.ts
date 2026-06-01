@@ -18,890 +18,1038 @@ type SeedTopic = {
 };
 
 const TOPICS: SeedTopic[] = [
-  // Week 1 — Foundations of quantitative reasoning
+  // Week 1 — Motion, forces, and energy
   {
-    slug: "what-is-quantitative-reasoning",
-    title: "What quantitative reasoning is and why it matters",
+    slug: "what-physics-is",
+    title: "What physics is and how physicists think",
     weekNumber: 1,
-    blurb: "Using numbers and quantities to reason carefully about the real world.",
-    lectureTitle: "1.1 What quantitative reasoning is and why it matters",
-    body: `# What quantitative reasoning is and why it matters
+    blurb: "The science of matter, energy, and the rules the universe obeys.",
+    lectureTitle: "1.1 What physics is and how physicists think",
+    body: `# What physics is and how physicists think
 
-**Quantitative reasoning (QR)** is the disciplined use of numbers, quantities, and basic mathematics to *understand the world and evaluate claims*. It is critical thinking aimed at anything with a number in it — prices, risks, statistics, polls, charts, and forecasts.
+**Physics** is the study of matter, energy, motion, and the fundamental rules that govern how the universe behaves. It is the most basic of the sciences: chemistry, biology, and astronomy all rest on the laws physics uncovers.
 
 ## What it is not
 
-- It is **not** advanced mathematics. The hard part is judgment, not algebra.
-- It is **not** raw calculation. A correct number answering the wrong question is useless.
-- It is **not** memorizing formulas. It is knowing *which* simple tool a situation calls for.
+- It is **not** just equations. The math is a language; the ideas come first.
+- It is **not** a list of facts to memorize. It is a way of *asking why*.
+- It is **not** only about the very large or very small. The same laws describe a falling apple and an orbiting moon.
 
-## The core moves
+## How physicists think
 
-A quantitative reasoner habitually:
+A physicist habitually:
 
-1. **Translates** between words and numbers — "most" into a rough percentage, a claim into a quantity.
-2. **Attaches units** to every number, so it means something.
-3. **Checks plausibility** — is this number even possible? Compared to what?
-4. **Finds the baseline** — a number is only meaningful next to a reference point.
+1. **Idealizes** — strips a messy situation down to its essentials (a "frictionless surface," a "point mass").
+2. **Quantifies** — turns "fast" into a number with units.
+3. **Seeks laws** — looks for rules that hold *everywhere*, not just here.
+4. **Tests** — trusts experiment over authority; a beautiful theory dies against one ugly fact.
+
+## The unreasonable power of simple laws
+
+A handful of compact laws — Newton's three, the conservation of energy, Maxwell's equations — predict an astonishing range of phenomena. Physics is the discovery that the universe is, at bottom, *comprehensible*: it runs on patterns we can write down.
+
+## Concept over calculation
+
+This is **conceptual physics** — the goal is deep understanding of *what is really going on*, with math as a tool rather than the point. Ask of any phenomenon: *what is moving, what is pushing it, and where does the energy go?*`,
+  },
+  {
+    slug: "space-time-frames",
+    title: "Space, time, and frames of reference",
+    weekNumber: 1,
+    blurb: "Measuring where and when, and why motion is always relative.",
+    lectureTitle: "1.2 Space, time, and frames of reference",
+    body: `# Space, time, and frames of reference
+
+All of physics happens somewhere (**space**) and somewhen (**time**). To describe an event we need both — a position and a moment.
+
+## Measuring space and time
+
+- **Space** is described by position: how far, and in what direction, from some chosen origin.
+- **Time** orders events: before, after, how long between.
+
+Physics expresses these in standard units — meters for distance, seconds for time — so that any two observers can compare measurements.
+
+## Frames of reference
+
+A **frame of reference** is the viewpoint from which you measure motion — your chosen origin and your state of motion. Crucially, *position and velocity have meaning only relative to a frame*.
+
+> Walking down the aisle of a moving train, you move at 1 m/s relative to the train, but perhaps 30 m/s relative to the ground.
+
+## There is no "absolute rest"
+
+You feel still right now, but Earth spins, orbits the Sun, and rides through the galaxy. **There is no special frame that is truly at rest** — only frames moving relative to one another. "Are you moving?" is an incomplete question; the answer is always *relative to what?*
+
+## Why frames matter
+
+Choosing the right frame can turn a hard problem into an easy one. Much of mechanics — and later all of relativity — hinges on recognizing that motion is never absolute, only a comparison between frames.`,
+  },
+  {
+    slug: "motion-and-change",
+    title: "Motion and the idea of change",
+    weekNumber: 1,
+    blurb: "Speed, velocity, and acceleration — describing how things change.",
+    lectureTitle: "1.3 Motion and the idea of change",
+    body: `# Motion and the idea of change
+
+**Motion** is change of position over time. Describing it precisely is the starting point of mechanics.
+
+## Speed and velocity
+
+- **Speed** is how fast: distance covered per unit time ($\\text{speed} = \\frac{\\text{distance}}{\\text{time}}$).
+- **Velocity** is speed *with a direction* — a **vector**. 60 km/h north is a velocity; 60 km/h is just a speed.
+
+The distinction matters: a car rounding a bend at steady speed has *changing velocity*, because its direction is changing.
+
+## Acceleration
+
+**Acceleration** is the rate of change of velocity. You accelerate when you speed up, slow down (negative acceleration), *or* change direction.
+
+> A falling object near Earth accelerates at about $9.8 \\text{ m/s}^2$ — each second, its downward speed grows by roughly 10 m/s.
+
+## The idea of change itself
+
+Physics is largely the study of *change*: position changes (velocity), velocity changes (acceleration). Galileo's great insight was that the natural state of motion is not rest but **constant velocity** — and that only *change* in motion needs explaining.
+
+## Why this reframes everything
+
+Ancient thinkers asked "what keeps things moving?" Galileo and Newton showed that is the wrong question. Motion needs no cause; *changes* in motion do. That shift — from explaining motion to explaining acceleration — opened the door to all of modern physics.`,
+  },
+  {
+    slug: "forces-and-acceleration",
+    title: "Forces and why things accelerate",
+    weekNumber: 1,
+    blurb: "Newton's laws: forces cause acceleration, not motion itself.",
+    lectureTitle: "1.4 Forces and why things accelerate",
+    body: `# Forces and why things accelerate
+
+A **force** is a push or a pull. Newton's three laws explain how forces relate to motion — the foundation of classical mechanics.
+
+## Newton's first law (inertia)
+
+An object at rest stays at rest, and an object in motion stays in motion at constant velocity, *unless acted on by a net force*. Motion does not need a cause; **changing** motion does.
+
+## Newton's second law
+
+The net force on an object equals its mass times its acceleration:
+
+$$F = ma$$
+
+The bigger the force, the bigger the acceleration; the bigger the mass, the smaller the acceleration for the same force. This single equation predicts the motion of nearly everything we see day to day.
+
+## Newton's third law
+
+For every action there is an **equal and opposite reaction**. When you push on a wall, the wall pushes back on you just as hard. A rocket flies by throwing gas backward; the gas throws the rocket forward.
+
+## Net force is what counts
+
+Several forces usually act at once — gravity, friction, a push. Only the **net** (total) force determines acceleration. A book resting on a table feels gravity *and* the table's upward push; they cancel, the net force is zero, and it stays put.
+
+## The big picture
+
+Forces don't keep things moving — they make motion *change*. Master "net force causes acceleration" and you can explain why a car turns, why you lurch when a bus brakes, and why the planets curve through space.`,
+  },
+  {
+    slug: "inertia-mass-momentum",
+    title: "Inertia, mass, and momentum",
+    weekNumber: 1,
+    blurb: "Resistance to change, and the conserved quantity of motion.",
+    lectureTitle: "1.5 Inertia, mass, and momentum",
+    body: `# Inertia, mass, and momentum
+
+## Inertia and mass
+
+**Inertia** is an object's resistance to a change in its motion. **Mass** is the measure of inertia: the more mass, the harder it is to start, stop, or turn.
+
+Mass is *not* the same as weight. Mass is how much "stuff" and how much inertia an object has; weight is the force of gravity on that mass. In orbit you are weightless but your mass — and inertia — is unchanged.
+
+## Momentum
+
+**Momentum** is mass in motion: the product of mass and velocity.
+
+$$p = mv$$
+
+A slow truck and a fast bullet can carry similar momentum. Momentum is a vector — it has direction — and it captures "how hard it is to stop something."
+
+## Conservation of momentum
+
+In any collision or interaction with no outside force, the **total momentum before equals the total momentum after**. This is one of the deepest laws in physics.
+
+> A cannon recoils because the forward momentum of the ball is matched by equal backward momentum of the cannon — the total stays zero.
+
+## Impulse
+
+To change momentum you apply a force over time (**impulse**). The same change can come from a big force briefly or a small force for longer. Airbags and crumple zones save lives by *stretching the time* of a collision, lowering the force.
 
 ## Why it matters
 
-We are flooded with numbers chosen to persuade: "40% more," "millions affected," "studies show." Quantitative reasoning is the skill that separates a number that *informs* from one that merely *impresses*. It protects you from being misled — by others and by your own innumeracy.
-
-## Numeracy
-
-QR is to numbers what literacy is to words. An innumerate person is as easily manipulated by a statistic as an illiterate person is by a forged document. The goal of this course is **fluent numeracy**: the reflex to ask, of any number, *how big, compared to what, and how do we know?*`,
+Conservation of momentum lets us predict collisions, rocket flight, and recoil without tracking every detail of the forces — we just balance the books before and after.`,
   },
   {
-    slug: "numbers-magnitude-number-line",
-    title: "Numbers, magnitude, and the number line",
+    slug: "energy-and-conservation",
+    title: "Energy and its conservation",
     weekNumber: 1,
-    blurb: "Size, scale, and where a number sits relative to others.",
-    lectureTitle: "1.2 Numbers, magnitude, and the number line",
-    body: `# Numbers, magnitude, and the number line
+    blurb: "The currency of change that can transform but never vanish.",
+    lectureTitle: "1.6 Energy and its conservation",
+    body: `# Energy and its conservation
 
-Every number has a **magnitude** — its size or scale. Quantitative reasoning starts with a feel for how big numbers are and how they compare.
+**Energy** is the capacity to do work — to make change happen. It comes in many forms but obeys one supreme rule: it is never created or destroyed, only transformed.
 
-## The number line
+## Kinetic and potential energy
 
-Picture every number as a point on a line: negatives to the left, zero in the middle, positives to the right. Two facts the line makes obvious:
+- **Kinetic energy** is energy of motion: $KE = \\tfrac{1}{2}mv^2$. Note the *square* — doubling speed quadruples kinetic energy.
+- **Potential energy** is stored energy of position or configuration — a raised weight, a stretched spring, fuel in a tank.
 
-- **Order:** $-5 < -2 < 0 < 3 < 100$.
-- **Distance:** the gap between numbers is itself a quantity (from $3$ to $100$ is $97$).
+## Work
 
-## Absolute vs. relative size
+**Work** is done when a force moves something through a distance, transferring energy from one form to another. Lifting a book does work *against* gravity, storing potential energy that returns as kinetic energy if you drop it.
 
-- **Absolute size:** the raw magnitude — a \\$10 difference.
-- **Relative size:** size compared to a base — \\$10 off a \\$12 shirt (huge) vs. \\$10 off a \\$30,000 car (trivial).
+## Conservation of energy
 
-Confusing the two is one of the most common quantitative errors.
+The **law of conservation of energy** says the total energy of an isolated system stays constant. A swinging pendulum trades potential for kinetic and back; a ball bouncing lower each time hasn't *lost* energy — it converted some to heat and sound.
 
-## Big and small numbers
+> Roller coaster: potential energy at the top becomes kinetic energy at the bottom, with a little lost to friction as heat.
 
-- A **thousand** is $10^3$, a **million** $10^6$, a **billion** $10^9$, a **trillion** $10^{12}$.
-- Each step is **1,000 times** the last. A million seconds is about 12 days; a billion seconds is about 32 *years*.
+## Power
 
-## Scientific notation
+**Power** is the *rate* of energy transfer — energy per unit time. The same job done faster requires more power, not more energy.
 
-For very large or very small numbers, write the magnitude as a power of ten: the speed of light is $3 \\times 10^8$ m/s; a virus is about $1 \\times 10^{-7}$ m wide. The exponent *is* the magnitude — read it first.`,
+## Why this law is sacred
+
+Conservation of energy has never been observed to fail. It lets physicists track change across transformations — chemical to thermal, gravitational to kinetic — by insisting the books always balance.`,
   },
   {
-    slug: "estimation-order-of-magnitude",
-    title: "Estimation and order-of-magnitude thinking",
+    slug: "cause-law-clockwork",
+    title: "Cause, law, and the clockwork universe",
     weekNumber: 1,
-    blurb: "Fast ballpark answers, and reasoning in powers of ten.",
-    lectureTitle: "1.3 Estimation and order-of-magnitude thinking",
-    body: `# Estimation and order-of-magnitude thinking
+    blurb: "Determinism, prediction, and the Newtonian worldview.",
+    lectureTitle: "1.7 Cause, law, and the clockwork universe",
+    body: `# Cause, law, and the clockwork universe
 
-A good **estimate** — a deliberate, rough approximation — is often more useful than a precise figure you cannot get. Estimation is the workhorse of quantitative reasoning.
+Newton's mechanics did more than explain motion — it suggested a **worldview**: a universe running like a vast, lawful machine.
 
-## Order of magnitude
+## Cause and effect
 
-An **order of magnitude** is a factor of ten. Two quantities are "the same order of magnitude" if one is within about 10× of the other. Asking *which power of ten* is the right first question:
+Classical physics is built on **causality**: every effect has a cause, and the same causes always produce the same effects. Forces cause accelerations in a perfectly reliable way.
 
-- Is a city's population in the thousands, the millions, or the billions?
-- Is a fix going to cost hundreds or hundreds of thousands?
+## The clockwork universe
 
-Getting the order of magnitude right matters far more than getting the last digit right.
+If you knew the position and velocity of every particle, and all the forces, Newton's laws would let you compute the future — and the past — exactly. This is **determinism**: the universe as a wound-up clock, its every tick already implied.
 
-## How to estimate
+> The mathematician Laplace imagined a "demon" who, knowing everything now, could foresee everything to come. That is the clockwork dream.
 
-1. **Round aggressively** — keep one significant figure ($317 \\to 300$).
-2. **Break the problem into pieces** you can each guess.
-3. **Combine**, then ask whether the result is plausible.
+## The power of physical law
 
-> About how many heartbeats in a lifetime? Roughly $70$ beats/min $\\times 60 \\times 24 \\times 365 \\times 80 \\approx 3 \\times 10^9$ — a few billion.
+A **physical law** is a regularity that holds universally and lets us *predict*. Newton's triumph was showing that earthly and heavenly motion obey the *same* laws — apples and planets alike. The cosmos is lawful and knowable.
 
-## Precision vs. accuracy
+## Cracks in the clockwork
 
-**False precision** — "the project will cost \\$48,217" — signals confidence the data cannot support. A reasoner who says "about \\$50,000, give or take ten" is being *more* honest. Match the precision of your answer to the precision of your inputs.`,
-  },
-  {
-    slug: "units-dimensions-sanity-checks",
-    title: "Units, dimensions, and sanity checks",
-    weekNumber: 1,
-    blurb: "Numbers without units are meaningless; units catch errors.",
-    lectureTitle: "1.4 Units, dimensions, and sanity checks",
-    body: `# Units, dimensions, and sanity checks
+This deterministic picture reigned for two centuries — but it is not the final word. **Chaos** makes some systems practically unpredictable even if lawful, and **quantum mechanics** (Week 3) injects genuine randomness. The clockwork is an extraordinary approximation, not the whole truth.
 
-A bare number is almost meaningless. "It's 30" — degrees? dollars? miles? The **unit** carries the meaning, and tracking units is one of the most powerful error-catching tools you have.
+## Why it still matters
 
-## Dimensional analysis
-
-Treat units as algebra you can cancel and multiply. To convert, multiply by a fraction equal to **1**:
-
-> $90 \\text{ km} \\times \\dfrac{1 \\text{ mi}}{1.6 \\text{ km}} \\approx 56 \\text{ mi}$
-
-The km cancel, leaving miles. If the units don't come out right, the calculation is wrong.
-
-## Compound units
-
-Rates combine units: speed is **miles per hour** (mi/hr), a price is **dollars per kilogram** (\\$/kg), a flow is **liters per second**. The word "per" is a division sign. Reading the units tells you what to multiply or divide.
-
-## Sanity checks
-
-Before trusting a number, ask: *is this even possible?*
-
-- A claim that a person drank "8 liters of water an hour" fails a sanity check.
-- An answer of "the bridge is 4 cm long" means a unit slipped.
-
-A famous \\$125-million spacecraft, the Mars Climate Orbiter, was lost because one team used pounds-force and another newtons. Units are not bookkeeping — they are correctness.`,
-  },
-  {
-    slug: "ratios-rates-proportional-reasoning",
-    title: "Ratios, rates, and proportional reasoning",
-    weekNumber: 1,
-    blurb: "Comparing quantities and scaling them up or down.",
-    lectureTitle: "1.5 Ratios, rates, and proportional reasoning",
-    body: `# Ratios, rates, and proportional reasoning
-
-A **ratio** compares two quantities by division: 3 cups flour to 1 cup sugar is the ratio $3:1$. A **rate** is a ratio of *different* units — 60 miles per 1 hour.
-
-## Unit rates
-
-A **unit rate** expresses "per one": \\$2.50 per pound, 25 miles per gallon. Unit rates make comparisons fair — to compare a 12 oz can at \\$0.90 with an 18 oz can at \\$1.26, reduce both to price *per ounce* (\\$0.075 vs. \\$0.07).
-
-## Proportions
-
-A **proportion** is the statement that two ratios are equal:
-
-> $\\dfrac{3 \\text{ flour}}{1 \\text{ sugar}} = \\dfrac{x}{4 \\text{ sugar}}$
-
-Cross-multiply to solve: $x = 12$ cups of flour. This is **proportional reasoning** — scaling a relationship up or down while keeping the ratio fixed.
-
-## Direct proportion
-
-Two quantities are **directly proportional** when one is always a constant multiple of the other: $y = kx$. Double the recipe, double every ingredient.
-
-## Per-capita reasoning
-
-Comparing raw totals across groups of different sizes is misleading. Country A has more total emissions than Country B, but if A has ten times the population, its **per-capita** (per person) emissions may be far lower. Always ask whether a total should be turned into a rate.`,
-  },
-  {
-    slug: "percentages-change-base-rates",
-    title: "Percentages, percentage change, and base rates",
-    weekNumber: 1,
-    blurb: "Percent of what? Change relative to what? The base is everything.",
-    lectureTitle: "1.6 Percentages, percentage change, and base rates",
-    body: `# Percentages, percentage change, and base rates
-
-A **percent** is just a fraction out of 100: $25\\% = \\frac{25}{100} = 0.25$. The crucial question is always *percent of what* — the **base**.
-
-## Percentage change
-
-$$\\text{percent change} = \\dfrac{\\text{new} - \\text{old}}{\\text{old}} \\times 100$$
-
-A price rising from \\$40 to \\$50 is a $\\frac{10}{40} = 25\\%$ increase. Note the base is the *old* value.
-
-## Increases and decreases are not symmetric
-
-A 50% rise followed by a 50% fall does **not** return you to the start: \\$100 → \\$150 → \\$75. Going up then down by the same percent leaves you lower, because the base changed.
-
-## Percentage points vs. percent
-
-If support rises from 40% to 44%, that is **4 percentage points** but a **10 percent** relative increase ($\\frac{4}{40}$). Reports blur these on purpose — watch which is meant.
-
-## Base rates
-
-The **base rate** is how common something is to begin with. "Cases doubled!" is alarming only if you know the base: 1 case to 2 is not 50 to 100. Relative claims ("twice as likely") are empty without the **absolute** base rate behind them.`,
-  },
-  {
-    slug: "reading-reconstructing-quantitative-claims",
-    title: "Reading and reconstructing quantitative claims",
-    weekNumber: 1,
-    blurb: "Pulling the real quantity, unit, base, and source out of a claim.",
-    lectureTitle: "1.7 Reading and reconstructing quantitative claims",
-    body: `# Reading and reconstructing quantitative claims
-
-A **quantitative claim** asserts something using a number. Most claims in the wild are stated loosely; **reconstructing** one means stating clearly what is actually being measured.
-
-## The four questions
-
-For any number you meet, ask:
-
-1. **What is the quantity?** What exactly was counted or measured?
-2. **What is the unit?** Dollars, percent, per capita, per year?
-3. **What is the base or comparison?** Bigger, cheaper, faster — *than what?*
-4. **What is the source?** Who produced this number, and how?
-
-## The missing denominator
-
-"10,000 people were harmed" sounds huge — but out of how many? Ten thousand out of ten thousand is a catastrophe; ten thousand out of a billion is rounding error. A numerator without its **denominator** is an unfinished claim.
-
-## Watch the framing
-
-The same fact can be dressed many ways: "90% fat-free" and "10% fat" are identical; "doubled the risk" and "rose from 1-in-a-million to 2-in-a-million" are identical. Reconstruct the claim in plain, neutral terms before you react to it.
-
-## Standard form for a number
-
-State it fully: *quantity, unit, base, time period, source.* "Unemployment is 4%" becomes "4% of the U.S. labor force was actively seeking work last month, per the Bureau of Labor Statistics." Now you can actually evaluate it.`,
+The Newtonian worldview shaped science, philosophy, and the very idea of progress. Understanding both its power *and* its limits is essential to understanding what physics claims about reality.`,
   },
 
-  // Week 2 — Quantitative inference and modeling
+  // Week 2 — Gravity, fields, and thermodynamics
   {
-    slug: "quantitative-arguments-vs-noise",
-    title: "Quantitative arguments vs. quantitative noise",
+    slug: "gravity-and-orbits",
+    title: "Gravity and the shape of orbits",
     weekNumber: 2,
-    blurb: "When a number is real evidence, and when it is just decoration.",
-    lectureTitle: "2.1 Quantitative arguments vs. quantitative noise",
-    body: `# Quantitative arguments vs. quantitative noise
+    blurb: "The universal force that pulls apples down and moons around.",
+    lectureTitle: "2.1 Gravity and the shape of orbits",
+    body: `# Gravity and the shape of orbits
 
-A **quantitative argument** uses a number as genuine *evidence* for a conclusion. **Quantitative noise** is numbers that look like evidence but do no logical work.
+**Gravity** is the attractive force between any two objects with mass. It is the weakest of the fundamental forces, yet it rules the cosmos because it is always attractive and never cancels out.
 
-## The test
+## Newton's law of universal gravitation
 
-Ask: **does this number actually bear on the conclusion?** If removing the number leaves the argument just as strong (or just as weak), the number was decoration.
+Every mass attracts every other mass with a force that grows with the masses and *shrinks with the square of the distance*:
 
-## Forms of noise
+$$F = G\\frac{m_1 m_2}{r^2}$$
 
-- **Irrelevant precision:** "Our method is 37.6% more effective" — more effective at what, measured how?
-- **Vague big numbers:** "Millions of people trust us" — millions out of how many, and trust meaning what?
-- **Number as ornament:** a statistic dropped in to *sound* rigorous while supporting nothing.
-- **Non-sequitur stats:** a true number that simply does not connect to the claim.
+Double the distance and the pull drops to a quarter — the **inverse-square law**.
 
-## A real quantitative argument
+## Why an apple and the Moon obey one law
 
-> "This intersection had 3 crashes per year before the new light and 0.4 per year after, over five years each — so the light reduced crashes."
+Newton's leap was realizing the force pulling an apple down is the *same* force holding the Moon in orbit. The Moon is, in effect, perpetually *falling* toward Earth — but moving sideways fast enough that it keeps missing.
 
-The numbers are relevant, comparable, and measured over a meaningful span. That is signal.
+## Orbits as endless falling
+
+An **orbit** is a balance between falling inward and moving forward. Too slow and you crash; too fast and you fly off; just right and you circle forever.
+
+> Fire a cannonball fast enough horizontally and it falls *around* the curve of the Earth — that is an orbit.
+
+## The shape of orbits
+
+Kepler found orbits are **ellipses**, not perfect circles, with the Sun at one focus. Planets move faster when closer to the Sun and slower when farther — sweeping equal areas in equal times.
 
 ## Why it matters
 
-Numbers carry an aura of authority. The first job in evaluating any data-backed claim is to decide whether the data is *load-bearing* or merely **rhetorical**. Strip the number out and see if the argument survives.`,
+The same simple law explains tides, satellites, the return of comets, and the architecture of the solar system. Gravity is the scaffolding of the universe.`,
   },
   {
-    slug: "validity-error-numerical-inference",
-    title: "Validity and error in numerical inference",
+    slug: "fields-action-at-a-distance",
+    title: "Fields and action at a distance",
     weekNumber: 2,
-    blurb: "Sound numerical reasoning, and why every number carries error.",
-    lectureTitle: "2.2 Validity and error in numerical inference",
-    body: `# Validity and error in numerical inference
+    blurb: "How forces reach across empty space without touching.",
+    lectureTitle: "2.2 Fields and action at a distance",
+    body: `# Fields and action at a distance
 
-A **numerical inference** draws a quantitative conclusion from quantitative premises. Like any reasoning, it can be valid or invalid — and the numbers themselves are never perfectly exact.
+How does the Sun pull the Earth across 150 million km of empty space? The puzzle of **action at a distance** led to one of physics' most powerful ideas: the **field**.
 
-## Valid vs. invalid steps
+## The problem of empty space
 
-A step is **invalid** when the conclusion does not follow:
+Gravity, electricity, and magnetism all act between objects that never touch. To early thinkers this seemed almost magical — a force reaching across a void.
 
-- Averaging averages without weighting by group size.
-- Adding percentages of different bases.
-- Concluding a trend from two data points.
+## The field idea
 
-## Accuracy vs. precision
+A **field** is a condition of space itself: every point around a mass (or a charge) carries a value telling what force *would* act on an object placed there. The object doesn't respond to the distant source directly — it responds to the field *right where it is*.
 
-- **Accuracy:** how close a measurement is to the true value.
-- **Precision:** how finely it is reported / how repeatable it is.
+> Iron filings around a magnet trace out the **magnetic field** — the invisible influence made visible.
 
-A scale that always reads 2 kg high is *precise but inaccurate*. The two are independent.
+## Fields are real, not bookkeeping
 
-## Error propagates
+Fields turn out to be physical things that carry energy and can exist on their own. A radio wave is a field rippling through space long after the antenna that made it has switched off.
 
-Every measurement has error, and error **flows through** a calculation. If a room is "about 4 m by 5 m, give or take 0.2 m," its area is *not* a clean $20\\text{ m}^2$ — the uncertainty grows. A result can never be more precise than the least precise input.
+## Mapping fields
 
-## Significant figures
+- **Field lines** show direction; their crowding shows strength.
+- A **gravitational field** points toward mass; an **electric field** points away from positive charge.
 
-Significant figures track how much you actually know. Multiplying $4.2$ (two figures) by $3.17$ should give $13$, not $13.314$ — the extra digits are fiction. **False precision** is claiming certainty your data cannot back. Round your conclusion to honesty.`,
+## Why fields matter
+
+The field concept replaced spooky action at a distance with a local, mechanical picture: influence spreads *through* space, point to point, at a finite speed. It underlies electromagnetism, light, and even Einstein's curved-spacetime gravity in Week 4.`,
   },
   {
-    slug: "linear-vs-nonlinear-thinking",
-    title: "Linear vs. nonlinear thinking",
+    slug: "electricity-and-charge",
+    title: "Electricity and charge",
     weekNumber: 2,
-    blurb: "Constant-rate intuition, and the many places it breaks down.",
-    lectureTitle: "2.3 Linear vs. nonlinear thinking",
-    body: `# Linear vs. nonlinear thinking
+    blurb: "Positive and negative charge, and the forces and flows between them.",
+    lectureTitle: "2.3 Electricity and charge",
+    body: `# Electricity and charge
 
-A relationship is **linear** when one quantity changes at a *constant rate* with another: $y = mx + b$, a straight line. Add one more, get the same fixed amount more. Human intuition defaults to linear — and the world often is not.
+**Electric charge** is a fundamental property of matter, like mass. It comes in two kinds — **positive** and **negative** — and it is the source of electrical forces.
 
-## Linear relationships
+## The rule of charge
 
-- Buying apples at \\$2 each: total cost is linear in count.
-- Driving at a steady speed: distance is linear in time.
+- **Like charges repel; opposite charges attract.**
+- Charge is carried by particles: electrons are negative, protons positive.
+- Charge is **conserved** — never created or destroyed, only moved around.
 
-The slope $m$ is the constant rate of change; the line never bends.
+## Coulomb's law
 
-## Nonlinear relationships
+The force between two charges follows an inverse-square law strikingly like gravity:
 
-In **nonlinear** relationships the rate of change itself changes:
+$$F = k\\frac{q_1 q_2}{r^2}$$
 
-- **Area and volume:** double a square's side and area grows $4\\times$; double a cube's side and volume grows $8\\times$ (the square–cube law).
-- **Compounding:** money or populations grow by a percentage, so the increase gets bigger each step.
-- **Diminishing returns:** the tenth hour of study adds far less than the first.
+But it is vastly stronger — and, unlike gravity, it can push *as well as* pull.
 
-## Why it misleads
+## Current and circuits
 
-Linear intuition badly underestimates nonlinear processes. "If 1 machine makes 100 parts/hour, 10 machines make 1,000" may be linear — but "if a pond's lily pads double daily and cover it in 30 days, when are they half-covered?" trips everyone (day 29, not day 15). **Ask whether the rate is constant before you extrapolate.**`,
+When charges flow, you have an **electric current**. A **circuit** is a loop that lets charge flow continuously, driven by a **voltage** (electrical "pressure") and opposed by **resistance**.
+
+> Voltage pushes, current flows, resistance restricts — like water pressure, flow, and a narrow pipe.
+
+## Static vs. current electricity
+
+- **Static electricity:** charge built up and held — the shock from a doorknob.
+- **Current electricity:** charge in motion — the power running your devices.
+
+## Why it matters
+
+Electrical forces hold atoms and molecules together — they are why solid matter is solid. And harnessing the *flow* of charge built the modern world. Charge is the bridge from raw physics to technology.`,
   },
   {
-    slug: "exponential-growth-decay",
-    title: "Exponential growth and decay",
+    slug: "magnetism-and-electricity",
+    title: "Magnetism and its unity with electricity",
     weekNumber: 2,
-    blurb: "Growth by a constant percentage: doubling, half-life, and surprise.",
-    lectureTitle: "2.4 Exponential growth and decay",
-    body: `# Exponential growth and decay
+    blurb: "Two forces revealed as one: electromagnetism.",
+    lectureTitle: "2.4 Magnetism and its unity with electricity",
+    body: `# Magnetism and its unity with electricity
 
-**Exponential** change multiplies by a constant factor each period — growth or decay by a fixed *percentage*, not a fixed amount.
+**Magnetism** seems separate from electricity — until you look closely. One of physics' great unifications showed they are two faces of a single force: **electromagnetism**.
 
-$$y = a\\,(1 + r)^t$$
+## Magnets and poles
 
-where $a$ is the start, $r$ the rate per period, $t$ the number of periods.
+Magnets have **north** and **south** poles. Like poles repel, opposites attract — and you can never isolate a single pole: cut a magnet in two and each half grows its own north *and* south.
 
-## Doubling time and the Rule of 70
+## The deep connection
 
-A quantity growing at $r\\%$ per period doubles in about $\\frac{70}{r}$ periods. At 7% annual growth, money doubles in roughly 10 years; at 10%, in about 7.
+Two experimental discoveries revealed the unity:
 
-## Why exponentials shock us
+1. **Moving charge makes magnetism.** A current in a wire creates a magnetic field around it (Oersted).
+2. **Changing magnetism makes electricity.** Moving a magnet near a coil drives a current (Faraday's **electromagnetic induction**).
 
-Exponential growth looks slow, then erupts. Grains of rice doubled on each of a chessboard's 64 squares total over $10^{19}$ grains — more than all the rice ever grown. Our linear intuition is hopeless here; that is exactly why compound interest, viral spread, and population growth surprise people.
+> Electricity and magnetism are not two forces but one — *electromagnetism* — appearing differently depending on your frame of reference.
 
-## Exponential decay
+## How the modern world runs on it
 
-The mirror image: a quantity falls by a constant percentage each period, $y = a(1-r)^t$. Its **half-life** is the time to halve. Radioactive material, drug concentration in the blood, and a depreciating car all decay exponentially — fast at first, then a long tail.
+- **Motors** turn electricity into motion using magnetic force.
+- **Generators** turn motion into electricity using induction.
+- **Transformers** ship power across continents.
 
-## The lesson
+## Maxwell's synthesis
 
-Whenever change is *by a percentage of the current amount*, reach for exponentials, not lines — and expect the future to arrive faster than it feels.`,
+James Clerk Maxwell wrote four equations uniting every electric and magnetic phenomenon. They predicted something stunning: self-sustaining electromagnetic waves traveling at the speed of light — meaning **light itself is electromagnetic** (next topic).
+
+## Why it matters
+
+The unification of electricity and magnetism is a model of what physics aspires to: showing that apparently different phenomena are deep down the *same thing*.`,
   },
   {
-    slug: "counting-combinatorics-possibility-spaces",
-    title: "Counting, combinatorics, and possibility spaces",
+    slug: "light-em-spectrum",
+    title: "Light as wave and the electromagnetic spectrum",
     weekNumber: 2,
-    blurb: "How fast possibilities multiply, and why we underestimate it.",
-    lectureTitle: "2.5 Counting, combinatorics, and possibility spaces",
-    body: `# Counting, combinatorics, and possibility spaces
+    blurb: "Light is an electromagnetic wave — one band of a vast spectrum.",
+    lectureTitle: "2.5 Light as wave and the electromagnetic spectrum",
+    body: `# Light as wave and the electromagnetic spectrum
 
-Many quantitative questions reduce to **counting**: how many ways, how many possibilities? The size of the **possibility space** drives probability, security, and risk.
+Maxwell's equations revealed that **light is an electromagnetic wave** — a self-propagating ripple of electric and magnetic fields, needing no medium to travel.
 
-## The multiplication principle
+## Light as a wave
 
-If one choice has $m$ options and an independent next choice has $n$, together they have $m \\times n$ outcomes. A 4-digit PIN has $10 \\times 10 \\times 10 \\times 10 = 10{,}000$ possibilities.
+A wave is described by:
 
-## Permutations vs. combinations
+- **Wavelength** — the distance between crests.
+- **Frequency** — how many crests pass per second.
+- **Speed** — for light in a vacuum, always $c \\approx 3 \\times 10^8$ m/s.
 
-- **Permutation** — order matters. Arrangements of 3 of 5 books: $5 \\times 4 \\times 3 = 60$.
-- **Combination** — order does not matter. Choosing 3 of 5 books: $\\frac{60}{3!} = 10$.
+Wavelength and frequency are inversely related: shorter waves oscillate faster.
 
-The factorial $n! = n\\times(n-1)\\times\\cdots\\times 1$ counts full orderings.
+## The electromagnetic spectrum
 
-## Combinatorial explosion
+Visible light is a *tiny* slice of a vast **electromagnetic spectrum**, ordered by wavelength:
 
-Possibilities multiply with terrifying speed. Just 10 binary on/off switches give $2^{10} = 1{,}024$ states; 20 give over a million. This is why brute-forcing a long password is hopeless — and why our gut badly *under*estimates how many configurations exist.
+> radio → microwave → infrared → **visible** → ultraviolet → X-ray → gamma
 
-## Why it matters for reasoning
+They are all the *same* phenomenon — electromagnetic waves — differing only in wavelength and energy. Radio waves are kilometers long; gamma rays are smaller than an atom.
 
-Probability is often "favorable outcomes ÷ total outcomes," so you cannot reason about chance without counting. And recognizing a huge possibility space explains coincidences: with millions of people buying lottery tickets, *someone* winning is near-certain even though *you* winning is not.`,
+## Color and energy
+
+Within visible light, wavelength is **color**: red is long-wavelength and low-energy, violet short and high-energy. Shorter wavelength means higher energy — which is why UV burns and X-rays penetrate.
+
+## Wave behavior
+
+Light **reflects**, **refracts** (bends entering glass or water), and **diffracts** (spreads around edges) — all hallmarks of waves. A prism splits white light into colors because each wavelength bends a different amount.
+
+## Why it matters
+
+Understanding light as electromagnetic waves explains rainbows, radio, vision, and the colors of stars — and sets up the great puzzle of Week 3, where light also behaves like a *particle*.`,
   },
   {
-    slug: "modeling-with-functions",
-    title: "Modeling with functions",
+    slug: "heat-temperature-time",
+    title: "Heat, temperature, and the arrow of time",
     weekNumber: 2,
-    blurb: "Turning a real situation into a function — and knowing its limits.",
-    lectureTitle: "2.6 Modeling with functions",
-    body: `# Modeling with functions
+    blurb: "Energy in motion at the molecular scale, and why heat flows one way.",
+    lectureTitle: "2.6 Heat, temperature, and the arrow of time",
+    body: `# Heat, temperature, and the arrow of time
 
-A **model** is a simplified description that maps inputs to outputs. A **function** — a rule giving one output per input — is the basic building block of quantitative models.
+**Thermodynamics** is the physics of heat and energy flow. It begins by distinguishing two ideas people routinely confuse.
 
-## Common model shapes
+## Temperature vs. heat
 
-- **Linear** $y = mx + b$: constant rate (a flat fee plus a per-unit charge).
-- **Quadratic** $y = ax^2$: area-like growth, or a thrown object's height.
-- **Exponential** $y = a(1+r)^t$: percentage growth or decay.
+- **Temperature** measures the *average* kinetic energy of the particles in a substance — how fast they jiggle.
+- **Heat** is the *transfer* of thermal energy from a hotter object to a cooler one.
 
-Choosing the right *shape* is the heart of modeling: does the quantity grow by a fixed amount, or a fixed percentage, or with the square of something?
+A spark is hotter (higher temperature) than a bathtub, but the bathtub holds far more total heat energy.
 
-## Every model has assumptions
+## Particles in motion
 
-A model includes some factors and ignores others. "Cost = \\$5 × items" assumes no bulk discount, no shipping, no tax. Knowing what a model *leaves out* tells you when to trust it.
+At the microscopic level, **heat is motion**: temperature is how vigorously atoms and molecules vibrate or fly about. At **absolute zero** ($-273°$C) that motion would all but stop.
 
-## "All models are wrong, some are useful"
+## How heat moves
 
-A model is a map, not the territory. The test is not whether it is perfectly true — none is — but whether it is *useful* for the question at hand.
+- **Conduction:** through direct contact, jiggle passed neighbor to neighbor.
+- **Convection:** by the bulk flow of a heated fluid.
+- **Radiation:** by electromagnetic waves, across empty space — how the Sun warms us.
 
-## Interpolation vs. extrapolation
+## Heat always flows one way
 
-Using a model *within* the data range (**interpolation**) is fairly safe. Pushing it far *beyond* the data (**extrapolation**) is dangerous: a child growing 6 cm/year does not reach 12 m tall by age 200. Models break outside the conditions they were built for.`,
+Heat flows **spontaneously from hot to cold**, never the reverse on its own. A hot coffee cools to room temperature; a cool coffee never spontaneously heats up.
+
+> This one-way flow defines an **arrow of time** — a direction that distinguishes past from future, which the laws of motion alone do not.
+
+## Why it matters
+
+Why heat has a preferred direction — while a bouncing ball's mechanics look the same run backward — is one of the deepest questions in physics. The answer is **entropy** (next topic).`,
   },
   {
-    slug: "fermi-estimation",
-    title: "Estimating the unknown (Fermi problems)",
+    slug: "entropy-and-disorder",
+    title: "Entropy and the tendency toward disorder",
     weekNumber: 2,
-    blurb: "Decompose an impossible question into estimable pieces.",
-    lectureTitle: "2.7 Estimating the unknown (Fermi problems)",
-    body: `# Estimating the unknown (Fermi problems)
+    blurb: "The second law: why the universe drifts toward disorder.",
+    lectureTitle: "2.7 Entropy and the tendency toward disorder",
+    body: `# Entropy and the tendency toward disorder
 
-A **Fermi problem** asks you to estimate a quantity that seems impossible to know, using only common-sense facts and arithmetic. Named for physicist Enrico Fermi, who could ballpark almost anything.
+**Entropy** is a measure of disorder — or more precisely, of the number of ways a system's parts can be arranged. The **second law of thermodynamics** says the total entropy of an isolated system tends to *increase*.
 
-## The method
+## Order, disorder, and probability
 
-1. **Decompose** the unknown into a chain of pieces you *can* guess.
-2. **Estimate** each piece to one significant figure.
-3. **Multiply** them together.
-4. **Sanity-check** the order of magnitude.
+There are vastly more disordered arrangements than ordered ones, so disorder is overwhelmingly more *likely*. A shuffled deck, a messy room, a mixed drink — systems drift toward the states there are simply more of.
 
-## The classic example
+> Drop a sandcastle and it crumbles; piles of sand never spontaneously assemble into castles. Both obey mechanics, but only one direction is probable.
 
-*How many piano tuners are in Chicago?*
+## The second law
 
-- ~3,000,000 people, ~2 per household → ~1,500,000 households.
-- Maybe 1 in 20 owns a piano → ~75,000 pianos.
-- Tuned once a year; a tuner does ~4/day × ~250 days ≈ 1,000/year.
-- So about $75{,}000 / 1{,}000 \\approx 75$ tuners.
+- Heat flows hot → cold because that *spreads energy out* (raises entropy).
+- No process can be perfectly efficient; some energy always disperses as waste heat.
+- You can create order locally (a fridge, a living cell) — but only by increasing entropy *more* somewhere else.
 
-The true figure is in that ballpark — remarkable for a problem with no data.
+## The arrow of time, explained
 
-## Why errors cancel
+Entropy gives time its direction. The underlying laws of motion run the same forwards and backwards, but the *statistical* march toward disorder does not. The future is simply the direction of higher entropy.
 
-Each guess is too high or too low, roughly at random, so over-and under-estimates **partly cancel** when multiplied. A Fermi estimate rarely nails the number, but it reliably lands the *order of magnitude* — which is usually what you need to make a decision.`,
+## The heat death of the universe
+
+Taken to its limit, the second law predicts the universe trends toward maximum entropy — energy evenly spread, no gradients left to drive change. A bleak but profound consequence.
+
+## Why it matters
+
+Entropy explains why perpetual-motion machines are impossible, why time flows one way, and why structure and life are precious, hard-won islands of order in a universe sliding toward disorder.`,
   },
 
-  // Week 3 — Statistics, probability, and data
+  // Week 3 — Atoms and the quantum world
   {
-    slug: "descriptive-statistics-what-they-hide",
-    title: "Descriptive statistics and what they hide",
+    slug: "atomic-picture-of-matter",
+    title: "The atomic picture of matter",
     weekNumber: 3,
-    blurb: "Summaries compress data — and quietly discard information.",
-    lectureTitle: "3.1 Descriptive statistics and what they hide",
-    body: `# Descriptive statistics and what they hide
+    blurb: "Everything is made of atoms — the most important idea in science.",
+    lectureTitle: "3.1 The atomic picture of matter",
+    body: `# The atomic picture of matter
 
-**Descriptive statistics** summarize a pile of data with a few numbers — a mean, a median, a percentage. They are indispensable, but every summary *throws information away*.
+If all scientific knowledge were lost but one sentence, Richard Feynman said, it should be: *everything is made of atoms.* The **atomic theory** is the bedrock of modern physics and chemistry.
 
-## Measures of center
+## What an atom is
 
-- **Mean:** the arithmetic average — sum divided by count.
-- **Median:** the middle value when sorted.
-- **Mode:** the most frequent value.
+An **atom** is the smallest unit of an element that retains its identity. Atoms are unimaginably small — millions would span the width of a hair — yet they are mostly *empty space*.
 
-These collapse a whole dataset into one number; by design they cannot show the spread, the shape, or the exceptions.
+## From atoms to everything
 
-## Counts vs. rates
+- **Atoms** combine into **molecules** (two hydrogen + one oxygen = water).
+- The *type* of atom (element) and how atoms bond explain why gold differs from glass.
+- All the matter you touch is just atoms arranged in different patterns.
 
-A raw **count** ("500 accidents") and a **rate** ("500 per million trips") tell different stories. A summary that reports one while you need the other can completely reverse the conclusion.
+## States of matter
 
-## What a single number hides
+The same atoms behave differently depending on how much they jiggle:
 
-Two classes can have the *same* average score while one is uniformly mediocre and the other is half brilliant, half failing. The mean hides that completely. Famous data sets exist with identical means, medians, and correlations but wildly different shapes — visible only when you actually plot them.
+- **Solid:** atoms locked in place, vibrating.
+- **Liquid:** atoms loosely bound, flowing.
+- **Gas:** atoms free and fast, flying apart.
 
-## The habit
+Add heat and you climb the ladder — ice to water to steam — without changing the atoms themselves.
 
-Whenever you are handed a summary statistic, ask **what it conceals**: the distribution, the outliers, the sample size, the denominator. The number that was *not* reported is often the one that matters.`,
+## Evidence for atoms
+
+You can't see atoms with your eyes, but the evidence is overwhelming: the jittery **Brownian motion** of pollen grains (explained by Einstein as atomic collisions), fixed chemical proportions, and today, direct images from electron microscopes.
+
+## Why it matters
+
+The atomic picture unifies chemistry, materials, biology, and physics under one idea — and raises the next question: if everything is atoms, *what are atoms made of?* The answer broke classical physics apart.`,
   },
   {
-    slug: "distributions-averages-outliers",
-    title: "Distributions, averages, and outliers",
+    slug: "quantum-revolution",
+    title: "The quantum revolution and its strangeness",
     weekNumber: 3,
-    blurb: "The shape of the data, and which average to trust.",
-    lectureTitle: "3.2 Distributions, averages, and outliers",
-    body: `# Distributions, averages, and outliers
+    blurb: "Energy comes in lumps, and the small world stops making ordinary sense.",
+    lectureTitle: "3.2 The quantum revolution and its strangeness",
+    body: `# The quantum revolution and its strangeness
 
-A **distribution** describes how the values in a dataset are spread out — how often each value (or range) occurs. The shape of the distribution decides which summary is honest.
+Around 1900, physics seemed nearly complete — then the study of atoms and light shattered the classical worldview. The **quantum revolution** revealed that the small-scale universe plays by deeply strange rules.
 
-## Shape
+## Energy comes in lumps
 
-- **Symmetric:** values balanced around the center (a bell curve).
-- **Skewed:** a long tail on one side (incomes, house prices — a few very large values stretch the right tail).
-- **Bimodal:** two distinct peaks (often two groups mixed together).
+Classical physics assumed energy is smooth and continuous. **Quantum** physics found it comes in discrete packets — **quanta**.
 
-## Mean vs. median under skew
+> Planck explained hot-object radiation only by assuming energy is emitted in chunks. Einstein explained the **photoelectric effect** only by treating light as particles — **photons**.
 
-The **mean** is pulled toward the long tail; the **median** resists it. In a town where most earn \\$40k but one resident earns \\$50 million, the *mean* income is in the millions while the *median* stays near \\$40k. For skewed data, the **median** is usually the fairer "typical" value.
+The very word *quantum* means "a discrete amount."
 
-## Outliers
+## The strangeness
 
-An **outlier** is a value far from the rest. It may be a data-entry error, or the single most important point in the set (a fraud, a breakthrough, a failure). Never silently delete outliers — investigate them. They distort the mean and can dominate a conclusion.
+The quantum world violates everyday intuition:
 
-## The takeaway
+- Particles can be in a **superposition** — multiple states at once — until measured.
+- Outcomes are **probabilistic**, not determined: physics predicts odds, not certainties.
+- **Measurement changes the system** — observing it forces a definite result.
 
-Before quoting an "average," picture the distribution. *Which* average, and whether it is being dragged by skew or outliers, often matters more than the value itself.`,
+## A break with the clockwork
+
+This demolished the deterministic clockwork of Week 1. At the deepest level the universe is *not* a predictable machine; it is irreducibly statistical. Einstein hated this — "God does not play dice" — but experiment sided against him.
+
+## It is not optional weirdness
+
+Quantum mechanics is the most precisely tested theory in history. Lasers, transistors, and the very stability of atoms depend on it. The strangeness is not a gap in our knowledge — it is how nature actually behaves.
+
+## Why it matters
+
+The quantum revolution redefined what physics can even *claim* to know — replacing certainty with probability and exact prediction with fundamental limits.`,
   },
   {
-    slug: "variation-spread-danger-of-mean",
-    title: "Variation, spread, and the danger of the mean",
+    slug: "wave-particle-duality",
+    title: "Wave-particle duality",
     weekNumber: 3,
-    blurb: "Why the average alone can be dangerously misleading.",
-    lectureTitle: "3.3 Variation, spread, and the danger of the mean",
-    body: `# Variation, spread, and the danger of the mean
+    blurb: "Light and matter behave as both waves and particles.",
+    lectureTitle: "3.3 Wave-particle duality",
+    body: `# Wave-particle duality
 
-Two datasets can share an identical mean yet behave completely differently. The missing piece is **spread** — how much the values vary.
+One of quantum mechanics' central mysteries: light — and matter — behave as **both waves and particles**, depending on how you look.
 
-## Measures of spread
+## Light: wave or particle?
 
-- **Range:** largest minus smallest value (simple, but sensitive to outliers).
-- **Variance:** the average squared distance from the mean.
-- **Standard deviation:** the square root of the variance — spread in the original units.
+- As a **wave**, light diffracts and interferes (Week 2).
+- As a **particle**, light delivers energy in discrete **photons** (the photoelectric effect).
 
-A small standard deviation means values cluster near the mean; a large one means they scatter widely.
+Neither picture alone is complete. Light is *both* — this is **wave-particle duality**.
 
-## The flaw of averages
+## The double-slit experiment
 
-Planning on the average alone can be disastrous. A statistician reportedly drowned crossing a river "4 feet deep on average" — it was 1 foot at the banks and 10 feet in the middle. The mean was true and useless.
+Fire light (or even single electrons) at two slits and an **interference pattern** of bright and dark bands appears on the screen — proof of wave behavior. The shock: it appears *even when particles are sent one at a time*. Each particle seems to interfere with *itself*, as if passing through both slits.
 
-## Why spread matters for decisions
+> Try to detect *which* slit each particle uses, and the interference pattern vanishes — the act of looking changes the result.
 
-- An investment averaging 8% with low variability is very different from one averaging 8% that swings between +40% and −30%.
-- A delivery that "averages 3 days" but ranges from 1 to 20 is unreliable even with a fine average.
+## Matter waves too
 
-## The habit
+De Broglie proposed that *matter* also has a wavelength. It was confirmed: electrons diffract like waves. Everything has a wave nature — but for large objects the wavelength is so tiny it is utterly unnoticeable.
 
-Never accept a mean without asking about the **variation** around it. The average tells you the center; the spread tells you the risk. A number without its spread is half a story.`,
+## How to hold both pictures
+
+An object isn't secretly a wave *or* secretly a particle. It is a quantum thing that *shows* wave behavior or particle behavior depending on the experiment. The question "which is it really?" assumes a classical answer the universe declines to give.
+
+## Why it matters
+
+Duality forces us to abandon the idea that small things are just tiny versions of everyday objects. It is the heart of the quantum mystery — and the setup for the uncertainty principle.`,
   },
   {
-    slug: "probability-quantifying-uncertainty",
-    title: "Probability and quantifying uncertainty",
+    slug: "uncertainty-limits-of-knowing",
+    title: "Uncertainty and the limits of knowing",
     weekNumber: 3,
-    blurb: "Putting numbers on chance, and the rules they obey.",
-    lectureTitle: "3.4 Probability and quantifying uncertainty",
-    body: `# Probability and quantifying uncertainty
+    blurb: "Heisenberg's principle: some pairs of facts can't both be exact.",
+    lectureTitle: "3.4 Uncertainty and the limits of knowing",
+    body: `# Uncertainty and the limits of knowing
 
-**Probability** measures how likely an event is, as a number from 0 (impossible) to 1 (certain). It is how we quantify uncertainty.
+Quantum mechanics does not just make prediction hard — it sets a *fundamental limit* on what can be known. This is **Heisenberg's uncertainty principle**.
 
-## Basic rules
+## The principle
 
-- A probability is always in $[0, 1]$.
-- **Complement:** $P(\\text{not } A) = 1 - P(A)$.
-- **Independent events** (one doesn't affect the other): $P(A \\text{ and } B) = P(A)\\cdot P(B)$.
-- **Mutually exclusive events** (can't both happen): $P(A \\text{ or } B) = P(A) + P(B)$.
+You cannot simultaneously know both the **position** and the **momentum** of a particle with perfect precision. The more exactly you pin down one, the more uncertain the other becomes.
 
-## Probability as long-run frequency
+> Pin down *where* an electron is, and *how fast it's going* blurs — and vice versa. The product of the two uncertainties cannot fall below a fixed limit.
 
-A fair coin has $P(\\text{heads}) = 0.5$ — meaning that over many flips, about half land heads. It does **not** promise exactly 5 heads in 10 flips.
+## Not a measurement flaw
 
-## The gambler's fallacy
+This is the crucial point: the uncertainty is **not** because our instruments are clumsy. A particle simply **does not possess** a precise position *and* a precise momentum at the same time. The limit is built into nature, not into our tools.
 
-After five heads in a row, the next flip is still $0.5$. The coin has no memory; "it's due for tails" is the **gambler's fallacy**. Independent events do not balance themselves out in the short run.
+## Why it happens
 
-## Combining small probabilities
+It flows from wave-particle duality. A particle localized to a point is built from many wavelengths (uncertain momentum); a particle with one sharp wavelength is spread out (uncertain position). You cannot have both at once — it is a property of waves.
 
-Independent risks multiply. If each part of a system fails with probability $0.1$, two such parts both holding is $0.9 \\times 0.9 = 0.81$. Reasoning about compound chance is just careful multiplication — and it routinely defeats intuition.`,
+## Consequences
+
+- Empty space seethes with **quantum fluctuations** — particles flickering in and out.
+- Electrons can't spiral into the nucleus; confining them too tightly would spike their momentum.
+- The future is genuinely *open*: with the present unknowable in full, exact prediction is impossible in principle.
+
+## Why it matters
+
+The uncertainty principle is the final nail in the clockwork coffin. It says the limit on knowledge is not practical but **fundamental** — there are facts the universe simply does not contain.`,
   },
   {
-    slug: "conditional-probability-base-rate-neglect",
-    title: "Conditional probability and base-rate neglect",
+    slug: "structure-of-the-atom",
+    title: "The structure of the atom",
     weekNumber: 3,
-    blurb: "Probability given evidence, and the famous test-result trap.",
-    lectureTitle: "3.5 Conditional probability and base-rate neglect",
-    body: `# Conditional probability and base-rate neglect
+    blurb: "A tiny dense nucleus, orbiting electrons, and quantized energy levels.",
+    lectureTitle: "3.5 The structure of the atom",
+    body: `# The structure of the atom
 
-**Conditional probability**, written $P(A \\mid B)$, is the probability of $A$ *given that* $B$ has occurred. Updating probabilities on new evidence is one of the most error-prone moves in reasoning.
+Atoms are not solid balls — they have an intricate internal structure that took decades and the quantum revolution to map.
 
-## The confusion of the inverse
+## The parts of an atom
 
-$P(A \\mid B)$ is **not** the same as $P(B \\mid A)$. The probability of a rash *given* measles is high; the probability of measles *given* a rash is low, because most rashes aren't measles. Swapping these two is a classic blunder.
+- **Protons** — positive charge, in the nucleus.
+- **Neutrons** — no charge, in the nucleus.
+- **Electrons** — negative charge, surrounding the nucleus.
 
-## Base-rate neglect
+The number of protons (the **atomic number**) defines the element.
 
-When we judge a conditional probability, we tend to ignore the **base rate** — how common the condition is to begin with.
+## The nuclear atom
 
-> A disease affects **1 in 1,000** people. A test is **99% accurate**. You test positive. Your chance of having the disease is *not* 99%.
+Rutherford fired particles at gold foil and found most passed straight through, but a few bounced back hard. The conclusion: an atom is almost entirely **empty space**, with nearly all its mass packed into a tiny, dense, positive **nucleus** at the center.
 
-Out of 100,000 people: ~100 are sick (≈99 test positive), but ~1% of the 99,900 healthy — about **999** — also test positive. So among ~1,098 positives, only ~99 are truly sick: roughly **9%**, not 99%.
+> If an atom were a stadium, the nucleus would be a marble at center field — and the electrons a faint haze in the stands.
 
-## The false-positive paradox
+## The quantum atom
 
-When a condition is rare, even an accurate test produces *mostly false positives*, because the huge healthy group swamps the tiny sick one. The base rate is decisive — and the instinct to ignore it is exactly what makes medical, legal, and security statistics so widely misread.`,
+Classically, orbiting electrons should spiral into the nucleus, radiating energy. They don't — because of quantum rules. Electrons occupy only **discrete energy levels**; they cannot exist between them.
+
+## Light from atoms
+
+When an electron jumps from a higher to a lower level, it emits a photon of a *specific* energy — a specific color. Each element has a unique **spectral fingerprint** of colors, which is how we know what distant stars are made of.
+
+## Why it matters
+
+The structure of the atom unites everything so far — electric forces, quantum energy levels, and light — into one picture, and points to the next layer down: what holds the nucleus together?`,
   },
   {
-    slug: "correlation-causation-confounding",
-    title: "Correlation, causation, and confounding",
+    slug: "nucleus-and-radioactivity",
+    title: "The nucleus and radioactivity",
     weekNumber: 3,
-    blurb: "Why things moving together need not be cause and effect.",
-    lectureTitle: "3.6 Correlation, causation, and confounding",
-    body: `# Correlation, causation, and confounding
+    blurb: "The forces inside the nucleus, and the energy of its decay.",
+    lectureTitle: "3.6 The nucleus and radioactivity",
+    body: `# The nucleus and radioactivity
 
-Two quantities are **correlated** when they tend to move together. The cardinal rule of quantitative reasoning: **correlation does not imply causation.**
+The **nucleus** packs positive protons into a vanishingly small space — yet they don't fly apart. Understanding why reveals new forces and the source of nuclear energy.
 
-## What correlation measures
+## The strong force
 
-A correlation coefficient runs from $-1$ to $+1$: near $+1$ they rise together, near $-1$ one rises as the other falls, near $0$ no linear relationship. It measures *association*, nothing more.
+Like-charged protons repel fiercely at such close range. They are held together by the **strong nuclear force** — far stronger than electricity but acting only across nuclear distances. It is the strongest of the four fundamental forces.
 
-## Why correlation ≠ causation
+## Isotopes and instability
 
-If A and B are correlated, several stories are possible:
+Atoms of an element can have different numbers of neutrons — **isotopes**. Some combinations are unstable; their nuclei eventually break down. That breakdown is **radioactivity**.
 
-- A causes B.
-- B causes A (**reverse causation**).
-- A third factor C causes both (a **confounder**).
-- It is coincidence (**spurious correlation**).
+## Three kinds of radiation
 
-Ice-cream sales correlate with drownings — not because ice cream drowns people, but because *summer heat* (the confounder) drives both.
+- **Alpha:** a heavy, slow chunk (two protons + two neutrons); stopped by paper.
+- **Beta:** a fast electron; stopped by metal foil.
+- **Gamma:** high-energy electromagnetic radiation; needs thick lead or concrete.
 
-## Spurious correlations
+## Half-life
 
-With enough variables, some will line up by pure chance. The number of films an actor appears in and yearly cheese consumption can correlate over a decade and mean absolutely nothing.
+Radioactive decay is random for any single atom but precisely statistical for many. The **half-life** is the time for half a sample to decay — from seconds to billions of years. This clockwork of decay enables **radiometric dating** of rocks and fossils.
 
-## Establishing causation
+## Fission and fusion
 
-To show causation you need to rule out confounders — ideally a **randomized controlled trial**, where you change one factor, hold the rest fixed, and compare. Until then, "linked to" is *not* "causes."`,
+- **Fission:** a heavy nucleus splits, releasing energy — reactors and atomic bombs.
+- **Fusion:** light nuclei merge, releasing even more — the power source of the Sun and stars.
+
+Both convert a tiny bit of mass into enormous energy, via $E = mc^2$ (Week 4).
+
+## Why it matters
+
+Nuclear physics powers the stars, dates the Earth, drives reactors, and — for better and worse — reshaped the modern world.`,
   },
   {
-    slug: "sampling-bias-law-of-small-numbers",
-    title: "Sampling, bias, and the law of small numbers",
+    slug: "particle-zoo-standard-model",
+    title: "The particle zoo and the Standard Model",
     weekNumber: 3,
-    blurb: "When a sample misrepresents the whole, and small samples mislead.",
-    lectureTitle: "3.7 Sampling, bias, and the law of small numbers",
-    body: `# Sampling, bias, and the law of small numbers
+    blurb: "The fundamental building blocks and forces of the universe.",
+    lectureTitle: "3.7 The particle zoo and the Standard Model",
+    body: `# The particle zoo and the Standard Model
 
-We almost never measure a whole **population**, so we study a **sample** and generalize. The sample is trustworthy only if it truly represents the whole.
+Probe deeper than protons and neutrons and a whole "zoo" of particles appears. The **Standard Model** of particle physics organizes them into our best theory of matter's fundamental ingredients.
 
-## Random sampling
+## Matter particles
 
-A **random sample** gives every member an equal chance of selection, which guards against hidden skew. Without randomness, the sample can systematically miss part of the population.
+Everything is built from two families of fundamental particles:
 
-## Kinds of bias
+- **Quarks** — combine in threes to make protons and neutrons (a proton is two "up" quarks and one "down").
+- **Leptons** — including the familiar **electron** and the ghostly, nearly massless **neutrino**.
 
-- **Selection bias:** the sampling method favors some group (a phone poll at noon misses workers).
-- **Response/non-response bias:** the people who answer differ from those who don't (angry customers review more).
-- **Survivorship bias:** you see only the survivors — studying only successful companies hides the failures that did the same things.
+These are believed to be truly fundamental — not made of anything smaller.
 
-## Margin of error
+## The four fundamental forces
 
-A poll result of "52% ± 3%" means the true value is plausibly 49–55%. A reported number without its margin of error pretends to a precision it does not have.
+All interactions reduce to four forces, each carried by a **force-carrier particle**:
 
-## The law of small numbers
+1. **Gravity** — weakest, but universal and long-range.
+2. **Electromagnetism** — carried by the **photon**.
+3. **Strong force** — binds quarks and nuclei.
+4. **Weak force** — drives certain radioactive decays.
 
-Small samples are **volatile**: flip a coin 4 times and all-heads is common; flip 1,000 times and it never happens. People wrongly expect tiny samples to mirror the population, which fuels false patterns — "this small school tops the rankings" usually reflects small-sample luck, soon erased by **regression to the mean**.`,
+> In the quantum view, a force *is* an exchange of particles — like two skaters tossing a ball and recoiling apart.
+
+## The Higgs
+
+The **Higgs field**, confirmed in 2012, gives many particles their mass. Its particle, the **Higgs boson**, was the Standard Model's last missing piece.
+
+## A triumph — and not the end
+
+The Standard Model is extraordinarily accurate, yet incomplete: it doesn't include gravity, doesn't explain dark matter, and leaves deep questions open. It is our best map, not the final territory.
+
+## Why it matters
+
+Particle physics is the search for the ultimate building blocks — the bottom layer of the question "what is everything made of?"`,
   },
 
-  // Week 4 — Applied quantitative reasoning and capstone
+  // Week 4 — Relativity, cosmology, and frontiers
   {
-    slug: "misleading-graphs-visualization",
-    title: "Misleading graphs and data visualization",
+    slug: "special-relativity-light",
+    title: "Special relativity and the constancy of light",
     weekNumber: 4,
-    blurb: "How charts distort the truth, and how to read them critically.",
-    lectureTitle: "4.1 Misleading graphs and data visualization",
-    body: `# Misleading graphs and data visualization
+    blurb: "Light's speed is the same for everyone — and it changes everything.",
+    lectureTitle: "4.1 Special relativity and the constancy of light",
+    body: `# Special relativity and the constancy of light
 
-A graph should make data *clearer*. A misleading graph makes a weak claim *look* strong by exploiting how our eyes read pictures.
+In 1905 Einstein overturned our notions of space and time with **special relativity**, built on two deceptively simple postulates.
 
-## Common tricks
+## The two postulates
 
-- **Truncated axis:** a y-axis starting at 90 instead of 0 turns a tiny change into a cliff.
-- **Inverted or dual axes:** two y-axes scaled to manufacture a "relationship."
-- **Cherry-picked range:** zooming to the window that shows the desired trend.
-- **3-D and perspective:** depth that distorts which bar looks bigger.
-- **Area for length:** doubling an icon's height *and* width quadruples its area, exaggerating a 2× change.
+1. **The laws of physics are the same in every inertial (non-accelerating) frame.** There is no preferred frame, no absolute rest.
+2. **The speed of light in a vacuum is the same for all observers**, no matter how they or the source are moving.
 
-## Read the chart, not the picture
+The second postulate is the shocker.
 
-1. **Check the axes** — where do they start, what are the units, is the scale linear?
-2. **Check the range** — what time span or subset is shown, and what is left off?
-3. **Find the baseline** — change relative to what?
-4. **Compare to the numbers** — does the visual impression match the actual figures?
+## Why constant light speed is so strange
 
-## The lesson
+In everyday life, speeds add: throw a ball forward from a moving train and the ground sees it go faster. But shine a flashlight from that train and the ground measures the light at *exactly* $c$ — not $c$ plus the train's speed.
 
-A picture can lie while every number on it is technically true. Treat a graph as a *claim* to be reconstructed — axes, scale, and range first — before you let its shape persuade you.`,
+> Chase a light beam at 99% of $c$ and it *still* races away from you at the full speed of light. Speed simply does not add the ordinary way.
+
+## Something has to give
+
+If everyone measures the same light speed, then *space and time themselves* must differ between observers. Speed is distance over time, so holding speed fixed forces distance and time to bend. That is the price of the postulates.
+
+## The end of absolute time
+
+There is no universal "now." Space and time are not separate, fixed backdrops but woven into a single, flexible **spacetime** that observers carve up differently.
+
+## Why it matters
+
+From these two postulates flow time dilation, length contraction, the relativity of simultaneity, and $E=mc^2$ — the rest of this week. Special relativity is among the best-confirmed theories in physics.`,
   },
   {
-    slug: "statistical-fallacies-number-abuse",
-    title: "Statistical fallacies and number abuse",
+    slug: "time-dilation-simultaneity",
+    title: "Time dilation and the relativity of simultaneity",
     weekNumber: 4,
-    blurb: "The recurring tricks people use to abuse statistics.",
-    lectureTitle: "4.2 Statistical fallacies and number abuse",
-    body: `# Statistical fallacies and number abuse
+    blurb: "Moving clocks run slow, and 'now' depends on who's asking.",
+    lectureTitle: "4.2 Time dilation and the relativity of simultaneity",
+    body: `# Time dilation and the relativity of simultaneity
 
-Statistics can be abused in a handful of recurring ways. Learn the patterns and you'll spot them everywhere.
+If light's speed is the same for everyone, time must be flexible. Two of the strangest consequences are **time dilation** and the **relativity of simultaneity**.
 
-## The usual suspects
+## Time dilation
 
-- **Cherry-picking:** reporting only the data that fits, ignoring the rest.
-- **Misleading average:** quoting the mean of skewed data to inflate a "typical" value.
-- **Base-rate fallacy:** ignoring how common something is when reading a probability.
-- **False precision:** "63.4% of users" from a survey of 30 people.
-- **Percentage abuse:** mixing up percent and percentage points, or hiding the base.
+**Moving clocks run slow.** A clock moving relative to you ticks slower than your own — and this is real, not an illusion.
 
-## Simpson's paradox
+> The faster you move, the slower your time passes *relative to* a stationary observer. Near the speed of light, the effect becomes dramatic.
 
-A trend can appear in every subgroup yet **reverse** when the groups are combined (or vice versa), depending on group sizes. A treatment can look better for men *and* for women separately, but worse overall — because the groups had very different baseline rates. Always ask whether pooling or splitting the data changes the story.
+It applies to *all* clocks, including biological ones — so it is about time itself, not about machinery.
 
-## p-hacking
+## The twin "paradox"
 
-Test enough hypotheses and some will look "significant" by chance alone. Running 20 comparisons and reporting only the one that "worked" manufactures a result out of noise.
+One twin rockets off near light-speed and returns younger than the twin who stayed home. Strange, but true and not paradoxical: the traveling twin accelerated and turned around, breaking the symmetry between them.
 
-## The defense
+## It is measured, not hypothetical
 
-For any statistic, ask the standard questions: *Compared to what? Out of how many? Selected how? What was left out?* Most number abuse collapses the moment you demand the denominator and the full data.`,
+Time dilation is confirmed daily. Particles created in the upper atmosphere survive long enough to reach the ground only because their clocks run slow. **GPS satellites** must correct for relativity or navigation would drift by kilometers a day.
+
+## The relativity of simultaneity
+
+Two events that are simultaneous for one observer are *not* simultaneous for another moving relative to the first. There is **no universal "now"** stretching across the universe — the ordering of distant events can genuinely differ between observers.
+
+## Why it matters
+
+These effects dismantle the intuition that time is a single, universal river flowing at one rate for all. Time is local, personal, and relative — one of the most counterintuitive truths in all of science.`,
   },
   {
-    slug: "risk-expected-value-decisions",
-    title: "Risk, expected value, and decision-making",
+    slug: "mass-energy-equivalence",
+    title: "Mass-energy equivalence",
     weekNumber: 4,
-    blurb: "Weighing outcomes by their probability to choose well.",
-    lectureTitle: "4.3 Risk, expected value, and decision-making",
-    body: `# Risk, expected value, and decision-making
+    blurb: "E = mc²: mass is a frozen, ferociously concentrated form of energy.",
+    lectureTitle: "4.3 Mass-energy equivalence",
+    body: `# Mass-energy equivalence
 
-Quantitative reasoning is not only about what is true, but about what to *do* under uncertainty. The key tool is **expected value**.
+Special relativity's most famous result is that **mass and energy are the same thing** in different forms, linked by the most famous equation in physics:
 
-## Expected value
+$$E = mc^2$$
 
-The **expected value** (EV) of a choice is each outcome's value weighted by its probability, then summed:
+## What the equation says
 
-$$\\text{EV} = \\sum (\\text{value} \\times \\text{probability})$$
+- $E$ is energy, $m$ is mass, and $c$ is the speed of light.
+- Because $c$ is enormous and it is *squared*, a *tiny* amount of mass holds a *staggering* amount of energy.
+- Mass is, in effect, frozen energy — a hyper-concentrated store.
 
-> A \\$1 ticket pays \\$1,000,000 with probability $\\frac{1}{10{,}000{,}000}$. Its EV is $\\frac{1{,}000{,}000}{10{,}000{,}000} = \\$0.10$ — far below the \\$1 price.
+## Just how much energy
 
-Lotteries and most gambles have negative expected value; insurance has negative EV for you *on average* but buys protection against ruin.
+The mass in a single paperclip, fully converted, could power a city for a long while. Matter is the most concentrated energy reservoir in the universe.
 
-## Relative vs. absolute risk
+## Where we see it
 
-"This drug doubles your risk" is meaningless without the base: from 1-in-a-million to 2-in-a-million is a doubling no one should fear. Always convert **relative risk** back to **absolute** numbers.
+- **The Sun:** fusion converts about 4 million tonnes of mass into sunlight *every second*.
+- **Nuclear power and weapons:** release energy by converting a sliver of nuclear mass.
+- **Particle accelerators:** turn energy *back into* mass, creating new particles from pure kinetic energy.
 
-## Beyond the average
+## Mass is not conserved alone
 
-EV assumes you can repeat the bet many times. For one-shot, high-stakes decisions, **risk tolerance** matters: a guaranteed \\$50 can rightly beat a coin-flip for \\$110 if losing would be catastrophic.
+A startling shift: mass and energy are not separately conserved — only the *combined* total is. In a nuclear reaction, the products weigh slightly less than the reactants; the missing mass left as energy.
 
-## Judge the decision, not the outcome
+## Why it matters
 
-A good decision is one with the best EV *given what you knew* — even if luck made it turn out badly. Don't confuse a bad result with a bad choice.`,
+$E=mc^2$ unified two pillars of Week 1 — conservation of mass and conservation of energy — into a single law. It explains why stars shine, why the nucleus stores such power, and reveals matter and energy as two faces of one reality.`,
   },
   {
-    slug: "evaluating-studies-polls-claims",
-    title: "Evaluating studies, polls, and claims",
+    slug: "general-relativity-spacetime",
+    title: "General relativity and curved spacetime",
     weekNumber: 4,
-    blurb: "The questions that separate solid evidence from spin.",
-    lectureTitle: "4.4 Evaluating studies, polls, and claims",
-    body: `# Evaluating studies, polls, and claims
+    blurb: "Gravity isn't a force — it's the curvature of spacetime by mass.",
+    lectureTitle: "4.4 General relativity and curved spacetime",
+    body: `# General relativity and curved spacetime
 
-Headlines distill studies into a sentence and lose everything that matters. Evaluating the quantitative claim behind the headline is a core applied skill.
+In 1915 Einstein extended relativity to gravity and acceleration, producing **general relativity** — a radical reimagining of what gravity *is*.
 
-## Questions for any study
+## Gravity is not a force
 
-- **Sample size:** how many subjects? Tiny studies are unreliable.
-- **Sampling method:** random and representative, or self-selected?
-- **Control group:** was there a comparison, or just before/after?
-- **Effect size:** is the difference large, or merely "statistically significant"?
-- **Funding and conflicts:** who paid, and do they gain from the result?
+Newton saw gravity as a force reaching across space. Einstein saw it differently: **mass and energy curve spacetime**, and what we call gravity is objects moving along the straightest possible paths through that curved geometry.
 
-## Observational vs. experimental
+> "Spacetime tells matter how to move; matter tells spacetime how to curve." — John Wheeler
 
-An **experiment** (especially a randomized controlled trial) can support causation. An **observational study** can only find correlation — so "people who do X live longer" may be confounded by everything else those people do.
+## The rubber-sheet picture
 
-## Polls
+Imagine a heavy ball on a stretched sheet: it dents the surface, and a rolling marble curves toward it — not because of a pull, but because the *surface itself* is warped. Planets orbit the Sun because they follow the valleys the Sun carves in spacetime.
 
-For a poll, check the **margin of error**, the **sample size**, *who* was asked, and *how the question was worded*. "Do you support common-sense reform?" and "Do you support this costly mandate?" poll the same policy very differently.
+## The equivalence principle
 
-## Statistical vs. practical significance
+Einstein's key insight: **gravity and acceleration are locally indistinguishable**. Standing on Earth feels exactly like accelerating in a rocket. From this single idea the whole theory unfolds.
 
-A result can be statistically significant yet trivial in size — a real but 0.1% effect. Ask not only "is it real?" but "is it **big enough to matter**?" The story and the statistic are rarely the same; reconstruct the claim before believing it.`,
+## Confirmed predictions
+
+- **Light bends** around massive objects (seen during eclipses, and as gravitational lensing).
+- **Time runs slower** in stronger gravity (confirmed by precise clocks at different altitudes).
+- **Black holes** — regions where spacetime curves so steeply nothing escapes.
+- **Gravitational waves** — ripples in spacetime, directly detected in 2015.
+
+## Why it matters
+
+General relativity replaced Newton's force with geometry, gave us black holes and the expanding universe, and remains our deepest theory of gravity — the stage on which cosmology plays out.`,
   },
   {
-    slug: "financial-economic-reasoning",
-    title: "Financial and economic quantitative reasoning",
+    slug: "expanding-universe-cosmology",
+    title: "The expanding universe and cosmology",
     weekNumber: 4,
-    blurb: "Interest, inflation, and the money math that trips people up.",
-    lectureTitle: "4.5 Financial and economic quantitative reasoning",
-    body: `# Financial and economic quantitative reasoning
+    blurb: "The galaxies are flying apart — and space itself is stretching.",
+    lectureTitle: "4.5 The expanding universe and cosmology",
+    body: `# The expanding universe and cosmology
 
-Money is where quantitative reasoning pays off most directly. A few ideas explain most personal-finance mistakes.
+**Cosmology** is the physics of the universe as a whole — its structure, origin, and fate. Its founding discovery: the universe is **expanding**.
 
-## Compound interest
+## Hubble's discovery
 
-Interest earns interest, so balances grow **exponentially**: $A = P(1+r)^t$. By the Rule of 70, money at 7% doubles in about a decade. The same math runs in reverse on debt — credit-card balances compound *against* you.
+In the 1920s Edwin Hubble found that distant galaxies are *receding* from us, and the farther away they are, the faster they go. The universe is not static — it is growing.
 
-## APR vs. APY
+## Space itself is stretching
 
-The **APR** is the stated annual rate; the **APY** folds in compounding within the year. A "1% monthly" card is not 12% but about $(1.01)^{12}-1 \\approx 12.7\\%$ APY. Compare loans by the compounded figure.
+The galaxies are not flying *through* space from an explosion. **Space itself is expanding**, carrying galaxies apart like raisins in rising dough. There is no center and no edge; every observer sees everyone else receding.
 
-## Real vs. nominal
+## Running the film backward
 
-A **nominal** amount ignores inflation; a **real** amount adjusts for it. A 3% raise during 4% inflation is a real *pay cut*. "Highest ever" dollar figures (box-office records, salaries) are usually meaningless until adjusted for inflation.
+If everything is spreading apart now, it was closer together in the past — and once unimaginably dense and hot. Rewind far enough and you reach a beginning: the **Big Bang** (next topic).
 
-## Opportunity cost and present value
+## Dark matter and dark energy
 
-Every dollar spent or tied up has an **opportunity cost** — the return it could have earned elsewhere. And money later is worth less than money now (**present value**), because today's dollar can be invested. Sound financial reasoning compares options on the same time-adjusted footing.
+Cosmology has revealed that ordinary matter is a small fraction of the universe:
 
-## The habit
+- **Dark matter** — unseen mass whose gravity holds galaxies together; about a quarter of everything.
+- **Dark energy** — a mysterious pressure *accelerating* the expansion; about 70%.
 
-When a financial claim appears, restate it in **compounded, inflation-adjusted, per-period** terms. Most "too good to be true" offers fail that translation instantly.`,
+Together they mean roughly **95% of the universe is stuff we cannot directly see and do not understand**.
+
+## Why it matters
+
+Cosmology applies the physics of the very small and the very fast to the largest scales imaginable — and confronts us with how much remains unknown about the cosmos we live in.`,
   },
   {
-    slug: "detecting-quantitative-misinformation",
-    title: "Detecting quantitative misinformation",
+    slug: "big-bang-origin",
+    title: "The Big Bang and the origin of everything",
     weekNumber: 4,
-    blurb: "Red flags that a number is fabricated, abused, or out of context.",
-    lectureTitle: "4.6 Detecting quantitative misinformation",
-    body: `# Detecting quantitative misinformation
+    blurb: "How the universe began hot and dense, and how we know.",
+    lectureTitle: "4.6 The Big Bang and the origin of everything",
+    body: `# The Big Bang and the origin of everything
 
-Numbers lend instant credibility, which makes them a favorite tool of misinformation. Detecting abused statistics is now a survival skill.
+The **Big Bang** is our best theory of how the universe began: about **13.8 billion years ago** from an extraordinarily hot, dense state, expanding and cooling ever since.
 
-## Red flags
+## Not an explosion in space
 
-- **No source:** a precise statistic with no traceable origin ("studies show 73%...").
-- **No denominator:** a scary numerator with no "out of how many."
-- **Suspicious precision:** "exactly 47.3% of people" when no one could measure that.
-- **Impossible or round-trip numbers:** figures that fail a basic sanity check, or percentages that exceed 100.
-- **Big number, no context:** a giant total with no per-capita or per-year framing.
-- **Mismatched comparison:** relative risk with the absolute base hidden.
+A common misconception: the Big Bang was not a bomb going off *in* empty space. It was the rapid expansion *of space itself*, everywhere at once. There was no "outside" and no central point — it happened *everywhere*.
 
-## Verification techniques
+## The story in stages
 
-1. **Trace the number** back to its original source, not the post quoting it.
-2. **Check the denominator** and the base rate.
-3. **Run a sanity check** — estimate it yourself and see if the orders of magnitude agree.
-4. **Read laterally** — see what independent sources report.
+1. **Earliest moments:** unimaginably hot and dense; the fundamental forces and particles emerge.
+2. **First minutes:** the lightest nuclei (hydrogen, helium) form as the universe cools.
+3. **~380,000 years:** atoms form; the universe becomes transparent and light streams free.
+4. **Hundreds of millions of years:** gravity pulls matter into stars and galaxies.
 
-## Consider the incentive
+## The evidence
 
-Ask who benefits if you believe and share the number. And apply the *same* scrutiny to statistics that flatter your own side — that is exactly where your guard drops and a fabricated figure slips through.`,
+The Big Bang is not a guess — it rests on three pillars:
+
+- **Cosmic expansion** (Hubble): the universe is growing, so it was once tiny.
+- **The cosmic microwave background:** the faint afterglow of the hot early universe, found everywhere in the sky.
+- **Abundance of light elements:** the observed hydrogen-to-helium ratio matches the theory's prediction precisely.
+
+## What it does not answer
+
+The Big Bang describes how the universe *evolved* from an early hot state — not what "caused" it or what came "before." Those remain open frontiers.
+
+## Why it matters
+
+The Big Bang ties together relativity, particle physics, and thermodynamics into a single grand narrative of cosmic history — the origin story of everything.`,
   },
   {
-    slug: "quantitative-reasoning-across-domains",
-    title: "Applying quantitative reasoning across domains",
+    slug: "frontiers-mysteries",
+    title: "Frontiers, mysteries, and unanswered questions",
     weekNumber: 4,
-    blurb: "How the same QR habits transfer to health, news, money, and policy.",
-    lectureTitle: "4.7 Applying quantitative reasoning across domains",
-    body: `# Applying quantitative reasoning across domains
+    blurb: "What physics still doesn't know — and where it's heading.",
+    lectureTitle: "4.7 Frontiers, mysteries, and unanswered questions",
+    body: `# Frontiers, mysteries, and unanswered questions
 
-Quantitative reasoning is a **general** skill, but it shows up differently in each field. The power comes from carrying the same habits everywhere.
+For all its triumphs, physics is unfinished. Some of the deepest questions remain wide open — and that is what keeps the science alive.
 
-## Domain by domain
+## The great unsolved problems
 
-- **Health:** convert relative risk to absolute; separate correlation from causation in studies; watch tiny samples.
-- **News:** check the denominator, the base rate, and the chart's axes before reacting to a statistic.
-- **Personal finance:** think in compounded, inflation-adjusted terms; weigh opportunity cost; ignore "highest ever" without adjustment.
-- **Policy:** ask about per-capita figures, confounders, and what a model leaves out.
-- **Everyday life:** estimate, sanity-check, and compare unit rates at the store.
+- **Quantum gravity:** our two best theories — quantum mechanics and general relativity — are mathematically incompatible. No one yet knows how to unite them.
+- **Dark matter and dark energy:** 95% of the universe is stuff we cannot identify.
+- **The measurement problem:** what *really* happens when a quantum system is observed?
+- **The arrow of time:** why did the universe begin in such a low-entropy, orderly state?
+- **Fine-tuning:** why do the constants of nature have values that allow stars, atoms, and life?
 
-## The transfer problem
+## Candidate ideas
 
-The hard part is **transfer** — using a skill learned in one context in a brand-new one. It does not happen automatically. You build it by deliberately asking the same core questions in every domain.
+Physicists pursue bold, unconfirmed ideas — **string theory**, **loop quantum gravity**, the **multiverse**. These are attempts, not yet answers; their test is always experiment.
 
-## The four reflexes
+## The limits of knowing
 
-Whatever the field, drill these until they are automatic:
+Some limits appear fundamental — the uncertainty principle, the speed of light, the cosmic horizon beyond which we can never see. Part of physics is learning what *cannot* be known, not just what can.
 
-1. **How big** is this — what order of magnitude?
-2. **Compared to what** — what is the base or baseline?
-3. **How do we know** — what is the source and method?
-4. **Does it pass a sanity check** — is this number even possible?
+## Why mysteries matter
 
-Make those four a reflex and you reason quantitatively anywhere.`,
+Every settled theory was once an open question. Newton, Maxwell, and Einstein each resolved a mystery and uncovered new ones. The frontier is not a sign of failure but the engine of discovery.
+
+## Why it matters
+
+Knowing what we *don't* know is as important as knowing what we do. The unanswered questions define where physics goes next — and remind us the universe is far from fully understood.`,
   },
   {
     slug: "capstone-synthesis",
     title: "Capstone synthesis",
     weekNumber: 4,
-    blurb: "Putting the whole quantitative toolkit to work on a real claim.",
+    blurb: "Tracing one phenomenon through the whole of physics.",
     lectureTitle: "4.8 Capstone synthesis",
     body: `# Capstone synthesis
 
-The capstone ties the course together: take a real quantitative claim from the wild and evaluate it end to end.
+The capstone ties the course together: take a single, everyday phenomenon and trace it down through *every layer of physics* we have studied.
 
-## The claim
+## The phenomenon
 
-> "A new study shows students who use our app score **20% higher**. Over **1 million** students can't be wrong — don't let your child fall behind."
+> **You stand in the sunlight and feel warm.**
 
-## Apply the toolkit
+A simple experience — and a thread that runs through the entire course.
 
-1. **Reconstruct the claim** — 20% higher *than whom*, on *what test*, over *what period*? (Topic 1.7)
-2. **Pin the base and units** — 20% of what score? Percentage points or relative percent? (Topic 1.6)
-3. **Sanity-check the magnitudes** — is a 20% jump even plausible; what does "1 million users" prove about *effectiveness*? (Topics 1.3, 2.1)
-4. **Interrogate the study** — sample size, control group, who funded it, observational or experimental? (Topics 3.7, 4.4)
-5. **Separate correlation from causation** — maybe motivated families both buy the app *and* study more (a confounder). (Topic 3.6)
-6. **Spot the number abuse and framing** — "1 million can't be wrong" is irrelevant; "fall behind" is fear, not data. (Topics 4.2, 4.6)
-7. **Weigh the decision** — expected value and cost vs. the real, absolute effect. (Topic 4.3)
+## Follow it through the physics
+
+1. **The source:** the Sun shines because **gravity** (Topic 2.1) crushes its core until **fusion** (Topic 3.6) ignites, converting mass to energy via **$E=mc^2$** (Topic 4.3).
+2. **The energy:** that energy leaves as **light** — electromagnetic waves (Topic 2.5) — having obeyed **conservation of energy** at every step (Topic 1.6).
+3. **The journey:** light crosses space at the universal speed $c$, the constant at the heart of **relativity** (Topic 4.1), through space that is itself **expanding** (Topic 4.5).
+4. **The arrival:** photons (Topic 3.2) strike your skin; **wave-particle duality** (Topic 3.3) governs how they're absorbed.
+5. **The warmth:** absorbed energy becomes **heat** — faster molecular motion (Topic 2.6) — and inevitably spreads, raising **entropy** (Topic 2.7) and pointing time's arrow forward.
 
 ## The standard
 
-A quantitative claim is worth believing when the **numbers are real, the comparison is fair, the method is sound, and the magnitude actually matters**. That single test — applied honestly to claims you like and dislike alike — is quantitative reasoning.`,
+You understand a phenomenon in the physicist's sense when you can name *what is moving, what force acts, where the energy comes from, and where it goes* — across scales from the cosmic to the atomic.
+
+## The whole in one ray of light
+
+A single sunbeam touches gravity, nuclear physics, relativity, electromagnetism, quantum mechanics, and thermodynamics. That unity — one universe, one connected set of laws — is the deepest lesson of conceptual physics.`,
   },
 ];
 
@@ -925,29 +1073,29 @@ const ASSIGNMENTS: SeedAssignment[] = [
   // Week 1
   {
     kind: "homework",
-    title: "Homework 1.1 — Numbers, magnitude, and estimation",
+    title: "Homework 1.1 — Motion, frames, and forces",
     weekNumber: 1,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice. Explain your reasoning in the answer box.",
     problems: [
-      { topicSlug: "what-is-quantitative-reasoning", prompt: "True or false: quantitative reasoning is mainly about doing advanced mathematics.", correctAnswer: "false", explanation: "QR is the careful use of basic math and judgment to evaluate real claims — not advanced math." },
-      { topicSlug: "numbers-magnitude-number-line", prompt: "A billion is how many times larger than a million? (A number.)", correctAnswer: "1000", explanation: "A billion is 10^9 and a million is 10^6, so it is 10^3 = 1,000 times larger." },
-      { topicSlug: "estimation-order-of-magnitude", prompt: "Two quantities are the 'same order of magnitude' if one is within about what factor of the other? (A number.)", correctAnswer: "10", explanation: "An order of magnitude is a factor of ten." },
+      { topicSlug: "what-physics-is", prompt: "True or false: physics is mainly about memorizing equations and facts.", correctAnswer: "false", explanation: "Physics is a way of asking why and seeking universal laws; math is a tool, not the point." },
+      { topicSlug: "space-time-frames", prompt: "Walking at 1 m/s toward the front of a train moving at 30 m/s, how fast do you move relative to the ground? (A number in m/s.)", correctAnswer: "31", explanation: "Velocities add: 30 + 1 = 31 m/s relative to the ground." },
+      { topicSlug: "motion-and-change", prompt: "A car rounds a bend at a steady speed. Is its velocity changing? (yes or no)", correctAnswer: "yes", explanation: "Velocity includes direction, so changing direction changes velocity — the car is accelerating." },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 1.2 — Units, ratios, and percentages",
+    title: "Homework 1.2 — Newton's laws, momentum, and energy",
     weekNumber: 1,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "units-dimensions-sanity-checks", prompt: "To convert a quantity from one unit to another, you multiply it by a fraction equal to what number?", correctAnswer: "1", explanation: "Conversion factors equal 1, so multiplying by them changes units without changing the value." },
-      { topicSlug: "ratios-rates-proportional-reasoning", prompt: "A rate that expresses a quantity 'per one' unit (like miles per gallon) is called a ____ rate.", correctAnswer: "unit", explanation: "A unit rate is expressed per single unit and makes comparisons fair." },
-      { topicSlug: "percentages-change-base-rates", prompt: "If a price rises from $40 to $50, what is the percentage increase? (Include the % sign or the number.)", correctAnswer: "25", explanation: "(50 − 40)/40 × 100 = 25%. The base is the old value, 40." },
-      { topicSlug: "percentages-change-base-rates", prompt: "Support rises from 40% to 44%. That is a rise of how many percentage points? (A number.)", correctAnswer: "4", explanation: "44 − 40 = 4 percentage points (though a 10% relative increase)." },
+      { topicSlug: "forces-and-acceleration", prompt: "In Newton's second law, net force equals mass times what? (One word.)", correctAnswer: "acceleration", explanation: "F = ma: net force equals mass times acceleration." },
+      { topicSlug: "inertia-mass-momentum", prompt: "Momentum is the product of an object's mass and its ____.", correctAnswer: "velocity", explanation: "Momentum p = mv, the product of mass and velocity." },
+      { topicSlug: "energy-and-conservation", prompt: "If you double an object's speed, its kinetic energy is multiplied by what factor? (A number.)", correctAnswer: "4", explanation: "KE = ½mv²; doubling v multiplies KE by 2² = 4." },
+      { topicSlug: "energy-and-conservation", prompt: "Energy is never created or destroyed, only ____.", correctAnswer: "transformed", explanation: "The law of conservation of energy: energy only changes form." },
     ],
   },
   {
@@ -958,41 +1106,41 @@ const ASSIGNMENTS: SeedAssignment[] = [
     timeLimitMinutes: 30,
     instructions: "Timed. 30 minutes. Pasting is disabled.",
     problems: [
-      { topicSlug: "numbers-magnitude-number-line", prompt: "$10 off a $12 shirt vs. $10 off a $30,000 car — is the $10 the same in absolute or in relative size?", correctAnswer: "absolute", explanation: "The absolute difference is identical ($10); the relative size differs enormously." },
-      { topicSlug: "estimation-order-of-magnitude", prompt: "Reporting a project cost as 'exactly $48,217' when the data is rough is an example of false ____.", correctAnswer: "precision", explanation: "False precision claims more exactness than the inputs support." },
-      { topicSlug: "units-dimensions-sanity-checks", prompt: "An answer that says a bridge is '4 cm long' should be rejected by what kind of check?", correctAnswer: "sanity check", explanation: "A sanity check asks whether the number is even possible." },
-      { topicSlug: "ratios-rates-proportional-reasoning", prompt: "Comparing countries' total emissions is misleading; you should instead compare ____ emissions (two words, 'per ___').", correctAnswer: "per capita", explanation: "Per-capita rates account for differing population sizes." },
-      { topicSlug: "percentages-change-base-rates", prompt: "A 50% increase followed by a 50% decrease leaves you above, below, or at the original value?", correctAnswer: "below", explanation: "$100 → $150 → $75: the base changes, so it is not symmetric." },
-      { topicSlug: "reading-reconstructing-quantitative-claims", prompt: "'10,000 people were harmed' is incomplete without which missing quantity?", correctAnswer: "denominator", explanation: "A numerator needs its denominator (out of how many) to be meaningful." },
+      { topicSlug: "space-time-frames", prompt: "Is there a single frame of reference that is truly and absolutely at rest? (yes or no)", correctAnswer: "no", explanation: "All motion is relative; there is no absolute rest frame." },
+      { topicSlug: "motion-and-change", prompt: "The rate of change of velocity is called ____.", correctAnswer: "acceleration", explanation: "Acceleration is how quickly velocity changes." },
+      { topicSlug: "forces-and-acceleration", prompt: "A book rests on a table. The net force on it is what number?", correctAnswer: "0", explanation: "Gravity and the table's upward push cancel, so the net force is zero." },
+      { topicSlug: "inertia-mass-momentum", prompt: "The measure of an object's inertia — its resistance to changes in motion — is its ____.", correctAnswer: "mass", explanation: "Mass measures inertia; it is not the same as weight." },
+      { topicSlug: "forces-and-acceleration", prompt: "For every action there is an equal and opposite ____ (Newton's third law).", correctAnswer: "reaction", explanation: "Forces come in equal-and-opposite pairs." },
+      { topicSlug: "cause-law-clockwork", prompt: "The idea that the universe's future is fully fixed by its present state and the laws of physics is called ____.", correctAnswer: "determinism", explanation: "Determinism is the clockwork view that the future is implied by the present." },
     ],
   },
 
   // Week 2
   {
     kind: "homework",
-    title: "Homework 2.1 — Arguments, inference, and growth",
+    title: "Homework 2.1 — Gravity, fields, and charge",
     weekNumber: 2,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "quantitative-arguments-vs-noise", prompt: "If removing a number from an argument leaves it just as strong, that number was evidence or noise?", correctAnswer: "noise", explanation: "A load-bearing number changes the argument; decoration does not." },
-      { topicSlug: "validity-error-numerical-inference", prompt: "A scale that always reads 2 kg too high is precise but not ____.", correctAnswer: "accurate", explanation: "Accuracy is closeness to the true value; precision is repeatability." },
-      { topicSlug: "exponential-growth-decay", prompt: "By the Rule of 70, money growing at 7% per year doubles in about how many years? (A number.)", correctAnswer: "10", explanation: "70 ÷ 7 = 10 years to double." },
+      { topicSlug: "gravity-and-orbits", prompt: "If you double the distance between two masses, the gravitational force becomes what fraction of the original? (e.g., 1/4)", correctAnswer: "1/4", explanation: "Gravity is inverse-square: doubling distance gives 1/2² = 1/4 the force." },
+      { topicSlug: "fields-action-at-a-distance", prompt: "The concept that replaces spooky 'action at a distance' with a condition of space carrying force is the ____.", correctAnswer: "field", explanation: "A field assigns a force-value to each point in space." },
+      { topicSlug: "electricity-and-charge", prompt: "Two charges with the same sign will attract or repel each other?", correctAnswer: "repel", explanation: "Like charges repel; opposite charges attract." },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 2.2 — Modeling, counting, and estimation",
+    title: "Homework 2.2 — Electromagnetism, light, and heat",
     weekNumber: 2,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "linear-vs-nonlinear-thinking", prompt: "If lily pads double daily and cover a pond on day 30, on what day is it half covered? (A number.)", correctAnswer: "29", explanation: "Doubling means it was half-covered the day before — day 29 (nonlinear thinking)." },
-      { topicSlug: "counting-combinatorics-possibility-spaces", prompt: "How many possible 4-digit PINs are there using digits 0–9? (A number.)", correctAnswer: "10000", explanation: "10 × 10 × 10 × 10 = 10,000 by the multiplication principle." },
-      { topicSlug: "modeling-with-functions", prompt: "Pushing a model far beyond the range of its data is called ____.", correctAnswer: "extrapolation", explanation: "Extrapolation beyond the data is risky; interpolation within it is safer." },
-      { topicSlug: "fermi-estimation", prompt: "A problem solved by decomposing an unknown into estimable pieces and multiplying is a ____ problem.", correctAnswer: "fermi", explanation: "Fermi problems estimate the unknown from common-sense pieces." },
+      { topicSlug: "magnetism-and-electricity", prompt: "Electricity and magnetism are unified into a single force called ____.", correctAnswer: "electromagnetism", explanation: "Moving charge makes magnetism and changing magnetism makes electricity — one force." },
+      { topicSlug: "light-em-spectrum", prompt: "Light is a type of ____ wave that needs no medium to travel.", correctAnswer: "electromagnetic", explanation: "Light is a self-propagating electromagnetic wave." },
+      { topicSlug: "heat-temperature-time", prompt: "Temperature measures the average ____ energy of a substance's particles.", correctAnswer: "kinetic", explanation: "Temperature is the average kinetic energy (jiggling) of particles." },
+      { topicSlug: "entropy-and-disorder", prompt: "The second law of thermodynamics says the total ____ of an isolated system tends to increase.", correctAnswer: "entropy", explanation: "Entropy (disorder) tends to increase, giving time its arrow." },
     ],
   },
   {
@@ -1003,43 +1151,43 @@ const ASSIGNMENTS: SeedAssignment[] = [
     timeLimitMinutes: 60,
     instructions: "Cumulative midterm. 60 minutes. Pasting disabled.",
     problems: [
-      { topicSlug: "numbers-magnitude-number-line", prompt: "Write the speed of light, 300,000,000 m/s, in scientific notation as 3 × 10^? (Give the exponent as a number.)", correctAnswer: "8", explanation: "300,000,000 = 3 × 10^8." },
-      { topicSlug: "estimation-order-of-magnitude", prompt: "When estimating, you should round each quantity to how many significant figures? (A number.)", correctAnswer: "1", explanation: "Keeping one significant figure is the norm for quick estimates." },
-      { topicSlug: "units-dimensions-sanity-checks", prompt: "Treating units as algebra you cancel and multiply is called dimensional ____.", correctAnswer: "analysis", explanation: "Dimensional analysis tracks units to catch errors." },
-      { topicSlug: "ratios-rates-proportional-reasoning", prompt: "If 3 cups flour go with 1 cup sugar, how many cups of flour go with 4 cups of sugar? (A number.)", correctAnswer: "12", explanation: "Proportional reasoning: 3/1 = x/4, so x = 12." },
-      { topicSlug: "quantitative-arguments-vs-noise", prompt: "'Our method is 37.6% more effective' with no measure of 'effective' is an example of irrelevant ____.", correctAnswer: "precision", explanation: "Irrelevant precision dresses up noise as evidence." },
-      { topicSlug: "linear-vs-nonlinear-thinking", prompt: "Doubling a cube's side multiplies its volume by what factor? (A number.)", correctAnswer: "8", explanation: "Volume scales with the cube of length: 2^3 = 8 (the square–cube law)." },
-      { topicSlug: "exponential-growth-decay", prompt: "Growth by a constant percentage each period is called ____ growth.", correctAnswer: "exponential", explanation: "Exponential growth multiplies by a fixed factor each period." },
-      { topicSlug: "counting-combinatorics-possibility-spaces", prompt: "When order does NOT matter, a selection of items is called a ____ (not a permutation).", correctAnswer: "combination", explanation: "Combinations ignore order; permutations count order." },
+      { topicSlug: "what-physics-is", prompt: "Physics expresses the speed of light as 3 × 10^? m/s. (Give the exponent as a number.)", correctAnswer: "8", explanation: "The speed of light is about 3 × 10^8 m/s." },
+      { topicSlug: "forces-and-acceleration", prompt: "What does a net force cause an object to do — keep moving, or change its motion?", correctAnswer: "change its motion", explanation: "Force causes acceleration (a change in motion), not motion itself." },
+      { topicSlug: "inertia-mass-momentum", prompt: "In a collision with no outside force, the total ____ before equals the total after.", correctAnswer: "momentum", explanation: "Conservation of momentum holds when no external force acts." },
+      { topicSlug: "energy-and-conservation", prompt: "A swinging pendulum continually trades kinetic energy for ____ energy and back.", correctAnswer: "potential", explanation: "Energy oscillates between kinetic and potential forms." },
+      { topicSlug: "gravity-and-orbits", prompt: "Kepler showed the orbits of planets are shaped like circles or ellipses?", correctAnswer: "ellipses", explanation: "Orbits are ellipses with the Sun at one focus." },
+      { topicSlug: "electricity-and-charge", prompt: "The flow of electric charge through a circuit is called electric ____.", correctAnswer: "current", explanation: "Current is charge in motion." },
+      { topicSlug: "light-em-spectrum", prompt: "Order by wavelength: which has the shorter wavelength, a radio wave or a gamma ray?", correctAnswer: "gamma ray", explanation: "Gamma rays have far shorter wavelengths (and higher energy) than radio waves." },
+      { topicSlug: "heat-temperature-time", prompt: "Heat always flows spontaneously from a hotter object to a ____ one.", correctAnswer: "colder", explanation: "Heat flows hot → cold, never the reverse on its own." },
     ],
   },
 
   // Week 3
   {
     kind: "homework",
-    title: "Homework 3.1 — Statistics and distributions",
+    title: "Homework 3.1 — Atoms and the quantum",
     weekNumber: 3,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "descriptive-statistics-what-they-hide", prompt: "The mean, median, and mode are all measures of a distribution's ____.", correctAnswer: "center", explanation: "They are measures of central tendency (center)." },
-      { topicSlug: "distributions-averages-outliers", prompt: "For income data skewed by a few huge values, which average is the fairer 'typical' value — mean or median?", correctAnswer: "median", explanation: "The median resists the pull of the long tail; the mean is dragged upward." },
-      { topicSlug: "variation-spread-danger-of-mean", prompt: "The square root of the variance, giving spread in the original units, is the standard ____.", correctAnswer: "deviation", explanation: "Standard deviation measures spread in the data's own units." },
+      { topicSlug: "atomic-picture-of-matter", prompt: "The smallest unit of an element that keeps its identity is the ____.", correctAnswer: "atom", explanation: "Atoms are the basic units of the elements." },
+      { topicSlug: "quantum-revolution", prompt: "In quantum physics, energy comes in discrete packets called ____.", correctAnswer: "quanta", explanation: "Energy is quantized — delivered in lumps called quanta." },
+      { topicSlug: "wave-particle-duality", prompt: "A particle of light is called a ____.", correctAnswer: "photon", explanation: "Light behaves as particles called photons." },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 3.2 — Probability and correlation",
+    title: "Homework 3.2 — Uncertainty, the atom, and the nucleus",
     weekNumber: 3,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "probability-quantifying-uncertainty", prompt: "After 5 heads in a row, the probability the next fair flip is heads is still what? (A decimal.)", correctAnswer: "0.5", explanation: "Coins have no memory; expecting tails is the gambler's fallacy." },
-      { topicSlug: "conditional-probability-base-rate-neglect", prompt: "Ignoring how common a condition is when reading a positive test result is base-rate ____.", correctAnswer: "neglect", explanation: "Base-rate neglect ignores prior prevalence, inflating the perceived risk." },
-      { topicSlug: "correlation-causation-confounding", prompt: "A hidden third variable that influences both correlated quantities is called a ____.", correctAnswer: "confounder", explanation: "A confounder (like summer heat for ice cream and drownings) drives both." },
-      { topicSlug: "sampling-bias-law-of-small-numbers", prompt: "Studying only successful companies and ignoring the failures is ____ bias.", correctAnswer: "survivorship", explanation: "Survivorship bias looks only at the survivors." },
+      { topicSlug: "uncertainty-limits-of-knowing", prompt: "Heisenberg's principle says you cannot simultaneously know a particle's exact position and its exact ____.", correctAnswer: "momentum", explanation: "Position and momentum cannot both be known precisely at once." },
+      { topicSlug: "structure-of-the-atom", prompt: "Nearly all of an atom's mass is concentrated in its tiny central ____.", correctAnswer: "nucleus", explanation: "Rutherford showed the atom is mostly empty space with a dense nucleus." },
+      { topicSlug: "nucleus-and-radioactivity", prompt: "The time for half a radioactive sample to decay is called its ____.", correctAnswer: "half-life", explanation: "Half-life is the time for half the atoms to decay." },
+      { topicSlug: "nucleus-and-radioactivity", prompt: "The force that holds protons together in the nucleus despite their repulsion is the ____ force.", correctAnswer: "strong", explanation: "The strong nuclear force overcomes electric repulsion at short range." },
     ],
   },
   {
@@ -1050,40 +1198,40 @@ const ASSIGNMENTS: SeedAssignment[] = [
     timeLimitMinutes: 40,
     instructions: "Timed. 40 minutes. Pasting disabled.",
     problems: [
-      { topicSlug: "descriptive-statistics-what-they-hide", prompt: "A numerator like '500 accidents' becomes far more meaningful when expressed as a ____ (e.g., per million trips).", correctAnswer: "rate", explanation: "A rate supplies the denominator a raw count omits." },
-      { topicSlug: "variation-spread-danger-of-mean", prompt: "Drowning in a river that is '4 feet deep on average' illustrates the flaw of ____.", correctAnswer: "averages", explanation: "The flaw of averages ignores variation around the mean." },
-      { topicSlug: "probability-quantifying-uncertainty", prompt: "For two independent events you find the probability that BOTH happen by ____ their probabilities.", correctAnswer: "multiplying", explanation: "P(A and B) = P(A) × P(B) for independent events." },
-      { topicSlug: "conditional-probability-base-rate-neglect", prompt: "When a condition is rare, even an accurate test yields mostly ____ positives.", correctAnswer: "false", explanation: "The large healthy group produces many false positives — the false-positive paradox." },
-      { topicSlug: "correlation-causation-confounding", prompt: "Correlation does not imply ____.", correctAnswer: "causation", explanation: "Association is not the same as cause and effect." },
+      { topicSlug: "atomic-picture-of-matter", prompt: "Adding heat takes a substance from solid to liquid to ____.", correctAnswer: "gas", explanation: "More molecular motion climbs the ladder solid → liquid → gas." },
+      { topicSlug: "wave-particle-duality", prompt: "The experiment showing light and electrons interfere like waves even one at a time is the ____-slit experiment.", correctAnswer: "double", explanation: "The double-slit experiment demonstrates wave-particle duality." },
+      { topicSlug: "uncertainty-limits-of-knowing", prompt: "Is quantum uncertainty caused by clumsy instruments, or built into nature? (Answer: instruments or nature)", correctAnswer: "nature", explanation: "The uncertainty is fundamental, not a measurement flaw." },
+      { topicSlug: "structure-of-the-atom", prompt: "The number of protons in an atom, which defines the element, is the atomic ____.", correctAnswer: "number", explanation: "The atomic number is the proton count and sets the element." },
+      { topicSlug: "particle-zoo-standard-model", prompt: "Protons and neutrons are each built from three particles called ____.", correctAnswer: "quarks", explanation: "Quarks combine in threes to form protons and neutrons." },
     ],
   },
 
   // Week 4
   {
     kind: "homework",
-    title: "Homework 4.1 — Graphs, fallacies, and risk",
+    title: "Homework 4.1 — Relativity",
     weekNumber: 4,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "misleading-graphs-visualization", prompt: "A bar chart whose y-axis starts at 90 instead of 0 exaggerates change by using a ____ axis.", correctAnswer: "truncated", explanation: "A truncated axis magnifies small differences." },
-      { topicSlug: "statistical-fallacies-number-abuse", prompt: "A trend that holds in every subgroup but reverses when groups are combined is ____'s paradox.", correctAnswer: "simpson", explanation: "Simpson's paradox arises from differing group sizes/baselines." },
-      { topicSlug: "risk-expected-value-decisions", prompt: "Each outcome's value weighted by its probability, then summed, is the ____ value.", correctAnswer: "expected", explanation: "Expected value combines magnitude and probability." },
+      { topicSlug: "special-relativity-light", prompt: "According to special relativity, is the speed of light the same for all observers? (yes or no)", correctAnswer: "yes", explanation: "Light's speed in a vacuum is constant for every observer — the second postulate." },
+      { topicSlug: "time-dilation-simultaneity", prompt: "A clock moving fast relative to you runs faster or slower than your own?", correctAnswer: "slower", explanation: "Moving clocks run slow — time dilation." },
+      { topicSlug: "mass-energy-equivalence", prompt: "In E = mc², what does m stand for? (One word.)", correctAnswer: "mass", explanation: "E = mc² links energy E to mass m via the speed of light c." },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 4.2 — Studies, money, and misinformation",
+    title: "Homework 4.2 — Spacetime, cosmology, and frontiers",
     weekNumber: 4,
     isTimed: false,
     timeLimitMinutes: null,
     instructions: "Untimed practice.",
     problems: [
-      { topicSlug: "evaluating-studies-polls-claims", prompt: "A study that can support causation (not just correlation) randomly assigns subjects and is called a randomized controlled ____.", correctAnswer: "trial", explanation: "Randomized controlled trials can establish causation." },
-      { topicSlug: "financial-economic-reasoning", prompt: "A 3% raise during 4% inflation is, in real terms, a pay ____.", correctAnswer: "cut", explanation: "Real value falls because inflation outpaces the nominal raise." },
-      { topicSlug: "detecting-quantitative-misinformation", prompt: "A scary statistic given with no traceable origin is missing what? (One word.)", correctAnswer: "source", explanation: "No traceable source is a top red flag for misinformation." },
-      { topicSlug: "quantitative-reasoning-across-domains", prompt: "Using a reasoning skill learned in one area in a brand-new area is called ____.", correctAnswer: "transfer", explanation: "Transfer must be built deliberately by asking the same core questions everywhere." },
+      { topicSlug: "general-relativity-spacetime", prompt: "In general relativity, gravity is explained as the curvature of ____.", correctAnswer: "spacetime", explanation: "Mass and energy curve spacetime; that curvature is gravity." },
+      { topicSlug: "expanding-universe-cosmology", prompt: "Hubble found that distant galaxies are moving toward us or away from us?", correctAnswer: "away", explanation: "Galaxies recede as space itself expands." },
+      { topicSlug: "big-bang-origin", prompt: "About how many billion years ago did the Big Bang occur? (A number.)", correctAnswer: "13.8", explanation: "The universe is about 13.8 billion years old." },
+      { topicSlug: "frontiers-mysteries", prompt: "The two theories that physicists have not yet been able to unite are quantum mechanics and general ____.", correctAnswer: "relativity", explanation: "Reconciling quantum mechanics with general relativity (quantum gravity) is unsolved." },
     ],
   },
   {
@@ -1094,16 +1242,16 @@ const ASSIGNMENTS: SeedAssignment[] = [
     timeLimitMinutes: 90,
     instructions: "Cumulative final. 90 minutes. Pasting disabled.",
     problems: [
-      { topicSlug: "reading-reconstructing-quantitative-claims", prompt: "For any number you meet, the missing piece that turns a numerator into a real claim is the ____.", correctAnswer: "denominator", explanation: "A numerator without its denominator is an unfinished claim." },
-      { topicSlug: "percentages-change-base-rates", prompt: "In the percentage-change formula, the base you divide by is the new value or the old value?", correctAnswer: "old", explanation: "Percent change = (new − old)/old; the base is the old value." },
-      { topicSlug: "exponential-growth-decay", prompt: "The time for an exponentially decaying quantity to fall to half its value is its ____.", correctAnswer: "half-life", explanation: "Half-life is the time to halve under exponential decay." },
-      { topicSlug: "fermi-estimation", prompt: "Fermi estimates land the right order of magnitude because over- and under-estimates tend to ____.", correctAnswer: "cancel", explanation: "Roughly random over/under guesses partly cancel when multiplied." },
-      { topicSlug: "distributions-averages-outliers", prompt: "A value far from the rest of the data, which can distort the mean, is an ____.", correctAnswer: "outlier", explanation: "Outliers pull the mean and must be investigated, not ignored." },
-      { topicSlug: "conditional-probability-base-rate-neglect", prompt: "P(A given B) is generally NOT equal to P(B given A); confusing them is the confusion of the ____.", correctAnswer: "inverse", explanation: "The confusion of the inverse swaps a conditional probability for its reverse." },
-      { topicSlug: "correlation-causation-confounding", prompt: "Ice-cream sales and drownings both rise in summer because of a shared confounder — name it (one word).", correctAnswer: "heat", explanation: "Summer heat drives both; neither causes the other." },
-      { topicSlug: "statistical-fallacies-number-abuse", prompt: "Running many tests and reporting only the one that looks significant is called p-____.", correctAnswer: "hacking", explanation: "p-hacking manufactures significance out of noise." },
-      { topicSlug: "risk-expected-value-decisions", prompt: "'This drug doubles your risk' is meaningless without converting relative risk to ____ risk.", correctAnswer: "absolute", explanation: "Relative risk needs the absolute base rate to be informative." },
-      { topicSlug: "capstone-synthesis", prompt: "A quantitative claim is worth believing when the numbers are real, the comparison is fair, the method is sound, and the magnitude actually ____.", correctAnswer: "matters", explanation: "Statistical significance is not enough; the effect must be large enough to matter." },
+      { topicSlug: "motion-and-change", prompt: "Galileo argued the natural state of motion is rest or constant velocity?", correctAnswer: "constant velocity", explanation: "Motion needs no cause; only changes in motion do." },
+      { topicSlug: "forces-and-acceleration", prompt: "Write Newton's second law as an equation of the form F = m_. (Fill the blank with one letter.)", correctAnswer: "a", explanation: "F = ma — force equals mass times acceleration." },
+      { topicSlug: "energy-and-conservation", prompt: "The rate at which energy is transferred or work is done is called ____.", correctAnswer: "power", explanation: "Power is energy per unit time." },
+      { topicSlug: "gravity-and-orbits", prompt: "An orbiting moon is best described as perpetually ____ toward the planet while moving sideways.", correctAnswer: "falling", explanation: "An orbit is endless falling combined with forward motion." },
+      { topicSlug: "entropy-and-disorder", prompt: "The one-way flow of heat and increase of entropy define the arrow of ____.", correctAnswer: "time", explanation: "Entropy distinguishes past from future — the arrow of time." },
+      { topicSlug: "wave-particle-duality", prompt: "Light and matter behaving as both waves and particles is called wave-particle ____.", correctAnswer: "duality", explanation: "Quantum objects show wave or particle behavior depending on the experiment." },
+      { topicSlug: "nucleus-and-radioactivity", prompt: "The Sun is powered by merging light nuclei — a process called ____.", correctAnswer: "fusion", explanation: "Fusion of light nuclei releases the energy that powers stars." },
+      { topicSlug: "mass-energy-equivalence", prompt: "E = mc² shows that mass is a highly concentrated form of ____.", correctAnswer: "energy", explanation: "Mass and energy are equivalent; a tiny mass holds enormous energy." },
+      { topicSlug: "general-relativity-spacetime", prompt: "Einstein's principle that gravity and acceleration are locally indistinguishable is the ____ principle.", correctAnswer: "equivalence", explanation: "The equivalence principle is the foundation of general relativity." },
+      { topicSlug: "capstone-synthesis", prompt: "To understand a phenomenon as a physicist, name where the energy comes from and where it ____.", correctAnswer: "goes", explanation: "Tracking energy from source to destination is the core of physical understanding." },
     ],
   },
 ];

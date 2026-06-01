@@ -26,7 +26,7 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     }, 2000);
 
     const t3 = setTimeout(() => {
-      setTypedAnswer("$45");
+      setTypedAnswer("32");
     }, 3000);
 
     const t4 = setTimeout(() => {
@@ -50,11 +50,11 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
 
     const t9 = setTimeout(() => {
       setCursorPos({ x: '35vw', y: '82vh' }); // move to keyboard
-      setTypedAnswer("$");
+      setTypedAnswer("1");
     }, 8500);
-    const t10 = setTimeout(() => setTypedAnswer("$3"), 9000);
-    const t11 = setTimeout(() => setTypedAnswer("$30"), 9500);
-    const t12 = setTimeout(() => setTypedAnswer("$30"), 10000);
+    const t10 = setTimeout(() => setTypedAnswer("12"), 9000);
+    const t11 = setTimeout(() => setTypedAnswer("12"), 9500);
+    const t12 = setTimeout(() => setTypedAnswer("12"), 10000);
 
     const t13 = setTimeout(() => {
       setCursorPos({ x: '70vw', y: '60vh' }); // Move to Submit
@@ -110,7 +110,7 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
         <div className="text-xs font-bold text-muted-foreground tracking-widest uppercase mb-4">Topic Practice</div>
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h1 className="text-4xl font-serif text-primary mb-2">Percentages and base rates</h1>
+            <h1 className="text-4xl font-serif text-primary mb-2">Forces and why things accelerate</h1>
             <div className="text-sm text-muted-foreground">Week 1 · 1 prior attempt · 1% accuracy · <span className="text-emerald-600 font-semibold">STRONG</span></div>
           </div>
           <div className="text-sm font-medium border border-border px-3 py-1 rounded-md bg-white">
@@ -126,10 +126,10 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
         <div className="bg-white border border-border rounded-xl shadow-sm overflow-hidden flex flex-col min-h-[400px]">
           <div className="p-8 flex-1 border-b border-border text-lg text-primary font-medium leading-relaxed">
             {phase >= 1 && phase < 4 && (
-              <StreamingText text="A $50 jacket is marked up 20%, then discounted 25% off the new price. What is the final price, in dollars?" delay={0} />
+              <StreamingText text="A 4 kg box is pushed with a net force of 8 newtons. What is its acceleration, in m/s²?" delay={0} />
             )}
             {phase >= 4 && (
-              <StreamingText text="A $40 item is raised 50%, then put on sale for 50% off. What is the final price, in dollars?" delay={0} />
+              <StreamingText text="A 5 kg cart is pushed with a net force of 60 newtons. What is its acceleration, in m/s²?" delay={0} />
             )}
           </div>
           
@@ -159,7 +159,7 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                     <span>Not quite</span>
                   </div>
                   <div className="text-sm text-red-900 leading-relaxed">
-                    <StreamingText text="Close, but percentages compound on different bases. $50 × 1.20 = $60, then $60 × 0.75 = $45. The markup and discount don't cancel because each acts on a different amount." delay={0} />
+                    <StreamingText text="Not quite. Acceleration is a = F ÷ m, not F × m. Here a = 8 N ÷ 4 kg = 2 m/s². For the same force, more mass means less acceleration." delay={0} />
                   </div>
                 </motion.div>
               )}
@@ -174,7 +174,7 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                     <span>Correct!</span>
                   </div>
                   <div className="text-sm text-emerald-900 leading-relaxed">
-                    <StreamingText text="Right — $40 × 1.50 = $60, then $60 × 0.50 = $30. A 50% increase followed by a 50% decrease lands below the original, because the decrease acts on a larger base." delay={0} />
+                    <StreamingText text="Right — a = F ÷ m = 60 N ÷ 5 kg = 12 m/s². Acceleration scales with the net force and inversely with the mass." delay={0} />
                   </div>
                 </motion.div>
               )}
@@ -182,8 +182,8 @@ export function Scene5({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
 
             <div className="mt-4">
               <div className="flex space-x-2 border-b border-border pb-2 mb-3 overflow-x-auto text-xs font-medium">
-                <div className="px-3 py-1 border-b-2 border-primary text-primary">Percentages</div>
-                {['Ratios', 'Estimation', 'Probability', 'Statistics', 'Growth', 'Causation', 'Graphs'].map(t => (
+                <div className="px-3 py-1 border-b-2 border-primary text-primary">Forces</div>
+                {['Energy', 'Motion', 'Momentum', 'Gravity', 'Waves', 'Heat', 'Quantum'].map(t => (
                   <div key={t} className="px-3 py-1 text-muted-foreground">{t}</div>
                 ))}
               </div>

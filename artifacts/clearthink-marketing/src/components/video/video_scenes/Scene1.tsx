@@ -38,7 +38,7 @@ export function Scene1() {
         />
         
         <h1 className="text-[7vw] font-serif font-bold text-text-inverse leading-none tracking-tight">
-          {'Quantitative Think'.split('').map((char, i) => (
+          {'Physics Think'.split('').map((char, i) => (
             <motion.span
               key={i}
               className="inline-block"
@@ -57,7 +57,7 @@ export function Scene1() {
           animate={phase >= 3 ? { opacity: 1, filter: 'blur(0px)', y: 0 } : { opacity: 0, filter: 'blur(10px)', y: 20 }}
           transition={{ duration: 0.8, ease: 'circOut' }}
         >
-          The Quantitative Reasoning Studio
+          The Conceptual Physics Studio
         </motion.div>
       </div>
     </motion.div>

@@ -64,7 +64,7 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
       {/* Left Pane: Lecture Content */}
       <div className="w-1/2 h-full border-r border-border p-12 overflow-hidden flex flex-col relative">
         <div className="text-xs font-bold tracking-widest text-muted-foreground mb-4">WEEK 1</div>
-        <h1 className="text-3xl font-serif text-primary mb-8">1.1 What quantitative reasoning is and why it matters</h1>
+        <h1 className="text-3xl font-serif text-primary mb-8">1.1 What physics is and how physicists think</h1>
         
         <div className="flex bg-muted/50 rounded-lg p-1 w-fit mb-10 border border-border">
           <div className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${phase < 1 ? 'bg-white shadow-sm text-primary' : 'text-muted-foreground'}`}>Short</div>
@@ -73,12 +73,12 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
         </div>
 
         <div className="prose prose-sm max-w-none text-foreground/80 space-y-6">
-          <h2 className="font-serif text-2xl text-primary">What quantitative reasoning is</h2>
+          <h2 className="font-serif text-2xl text-primary">What physics is</h2>
           <p>
-            Quantitative reasoning is the disciplined use of numbers, quantities, and basic mathematics to understand the world and evaluate claims. It is not about advanced math; it is about judgment — being careful, honest, and skeptical with figures.
+            Physics is the study of how the physical world works at its most fundamental level — matter, motion, energy, and the forces that govern them. It is not about advanced math; it is about understanding why things happen the way they do.
           </p>
           <p>
-            A quantitative reasoner habitually asks: how big is this number, compared to what, in what units, and how do we know it is true?
+            A physicist habitually asks: what is moving, what forces act on it, what is conserved, and how do we know it is true?
           </p>
           
           <AnimatePresence>
@@ -90,10 +90,10 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                 className="space-y-6"
               >
                 <p>
-                  Quantitative reasoning is not the same as being good at arithmetic, and it is not memorizing formulas. It is a skill — a set of habits you can practice and improve — for putting numbers in context.
+                  Physics is not the same as being good at algebra, and it is not memorizing formulas. It is a skill — a set of habits you can practice and improve — for reasoning about cause and effect in the natural world.
                 </p>
                 <p>
-                  Numeracy is to numbers what literacy is to words. The strongest reasoners attach units, find the base rate, and run a quick sanity check before trusting any statistic.
+                  Concepts come before calculations. The strongest physicists picture the situation, identify the forces and the energy, and run a quick sanity check before trusting any number.
                 </p>
               </motion.div>
             )}
@@ -120,13 +120,13 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
               >
                 <div className="mb-4 text-xs font-semibold text-muted-foreground uppercase tracking-widest">Starter questions for this section</div>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">What's the difference between absolute and relative size?</div>
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Is quantitative reasoning just doing math?</div>
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Why does a missing denominator matter?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">What's the difference between speed and velocity?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Is physics just applied math?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Why does understanding forces matter?</div>
                 </div>
                 <div className="w-full h-24 border border-border rounded-lg bg-muted/20 p-3 text-muted-foreground text-sm flex items-end shadow-inner">
                   <div className="w-full flex justify-between">
-                    <span>Ask a question about quantitative reasoning...</span>
+                    <span>Ask a question about conceptual physics...</span>
                     <div className="w-8 h-8 rounded bg-primary text-white flex items-center justify-center cursor-pointer opacity-50">↑</div>
                   </div>
                 </div>
@@ -157,7 +157,7 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                     className="p-6 border border-border rounded-xl shadow-sm bg-white"
                   >
                     <p className="text-foreground font-medium mb-6">
-                      A $40 item is raised 50%, then put on sale for 50% off. What is the final price, in dollars?
+                      A 2 kg cart is pushed with a net force of 10 newtons. What is its acceleration, in m/s²?
                     </p>
                     <div className="w-full h-12 border border-border rounded-md bg-muted/10 mb-4 px-3 flex items-center text-muted-foreground">Type your answer...</div>
                     <div className="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium w-fit ml-auto">Submit</div>

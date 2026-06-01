@@ -27,4 +27,10 @@ This app (student app `qr-course`, demo `qr-course-demo`, `api-server`) carries 
 
 **Env note:** if topics count is 0 / tables missing on a fresh env, run `pnpm --filter @workspace/db run push` then restart `api-server` (seed runs on boot via `seedIfEmpty`).
 
+**Reseeding after a content change (CRITICAL):** `seedIfEmpty` is a no-op when `topics` is non-empty, so editing `seed.ts` does NOT update an already-populated DB — the running app keeps serving the OLD content. To force a refresh: `TRUNCATE topics, lectures, assignments, problems, attempts, answers, practice_sessions, practice_problems, practice_attempts RESTART IDENTITY CASCADE;` then restart `api-server`. The active DB may NOT be the shell's `$DATABASE_URL`: the workflow can run against the local `helium` Postgres (`psql -h helium -U postgres -d heliumdb`, PGPASSWORD=password) while the shell/`executeSql` point at a Neon URL — verify which one actually has the `topics` table before truncating, and `pnpm --filter @workspace/db run push` to whichever the app uses if the schema is missing.
+
+**Built `dist` is gitignored + rebuilt on deploy:** a stale `artifacts/qr-course/dist/public/index.html` with the OLD subject is NOT a real leak — it's git-ignored and the production `build` command in `artifact.toml` regenerates it from the corrected source `index.html`. Don't chase it.
+
+**Scope discipline ("change subject only, preserve format 100%"):** code review may flag pre-existing doc imprecision (e.g. replit.md "week four adds a midterm and a final" while seed puts the midterm in week 2) and demand demo scenes use EXACT seeded problems. If the wording/structure pre-dates the migration (`git show HEAD:<file>` to confirm) and the demo problems are illustrative-but-correct, these are out of scope — preserving the original format trumps the architect's stricter standard.
+
 **Retained-feature judgment:** the `MathKeyboard` component is a generic multi-subject symbol palette (has a "Logic & Sets" tab) defaulting to "Numbers"; left intact during the Critical Thinking migration to preserve functionality/UX per the "only subject matter changes" directive.

@@ -18,24 +18,24 @@ const router: IRouter = Router();
 
 const WEEK_TITLES: Record<number, { title: string; summary: string }> = {
   1: {
-    title: "Week 1 — Foundations of quantitative reasoning",
+    title: "Week 1 — Motion, forces, and energy",
     summary:
-      "Magnitude and the number line, estimation and orders of magnitude, units and sanity checks, ratios and rates, percentages and base rates, and reading quantitative claims.",
+      "What physics is and how physicists think, space and time and frames of reference, motion and change, forces and acceleration, inertia and momentum, energy and its conservation, and the clockwork universe.",
   },
   2: {
-    title: "Week 2 — Quantitative inference and modeling",
+    title: "Week 2 — Gravity, fields, and thermodynamics",
     summary:
-      "Quantitative arguments vs. noise, validity and error, linear vs. nonlinear thinking, exponential growth, counting and combinatorics, modeling with functions, and Fermi estimation.",
+      "Gravity and orbits, fields and action at a distance, electricity and charge, magnetism and its unity with electricity, light and the electromagnetic spectrum, heat and temperature, and entropy and the arrow of time.",
   },
   3: {
-    title: "Week 3 — Statistics, probability, and data",
+    title: "Week 3 — Atoms and the quantum world",
     summary:
-      "Descriptive statistics, distributions and outliers, variation and spread, probability, conditional probability and base rates, correlation vs. causation, and sampling and bias.",
+      "The atomic picture of matter, the quantum revolution, wave-particle duality, the uncertainty principle, the structure of the atom, the nucleus and radioactivity, and the particle zoo and Standard Model.",
   },
   4: {
-    title: "Week 4 — Applied quantitative reasoning and capstone",
+    title: "Week 4 — Relativity, cosmology, and frontiers",
     summary:
-      "Misleading graphs, statistical fallacies, risk and expected value, evaluating studies and polls, financial reasoning, detecting quantitative misinformation, transfer across domains, and the capstone.",
+      "Special relativity and the constancy of light, time dilation and simultaneity, mass-energy equivalence, general relativity and curved spacetime, the expanding universe, the Big Bang, frontiers and mysteries, and the capstone.",
   },
 };
 
@@ -124,7 +124,7 @@ router.get("/course/overview", async (_req, res) => {
 
   res.json(
     GetCourseOverviewResponse.parse({
-      title: "Quantitative Reasoning",
+      title: "Conceptual Physics",
       weeks,
       totals: { assignmentsCompleted, assignmentsTotal, practiceCount },
     }),

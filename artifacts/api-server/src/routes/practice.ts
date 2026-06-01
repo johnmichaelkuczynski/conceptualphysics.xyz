@@ -155,19 +155,19 @@ router.post("/practice/sessions/:sessionId/next", async (req, res): Promise<void
       correctAnswer: string;
       explanation: string;
     }>(
-      `You generate a single quantitative-reasoning practice problem for a college freshman. The problem MUST be on the topic "${topic.title}" and at difficulty "${difficultyLabel}" (${difficulty.toFixed(
+      `You generate a single conceptual-physics practice problem for a college freshman. The problem MUST be on the topic "${topic.title}" and at difficulty "${difficultyLabel}" (${difficulty.toFixed(
         1,
-      )}/5). The answer must be a short string (a single word, short phrase, or letter choice) — never multi-paragraph. Respond as strict JSON: {"prompt": string, "correctAnswer": string, "explanation": string}. Avoid these recent prompts: ${JSON.stringify(
+      )}/5). Favor conceptual understanding over heavy algebra; simple arithmetic or a single equation like F=ma is fine, but the focus is on physical reasoning. The answer must be a short string (a single word, short phrase, number, or letter choice) — never multi-paragraph. Respond as strict JSON: {"prompt": string, "correctAnswer": string, "explanation": string}. Avoid these recent prompts: ${JSON.stringify(
         lastProblems.map((p) => p.prompt),
       )}.`,
       userRequest || `Generate a new ${difficultyLabel} problem on ${topic.title}.`,
     );
   } catch {
     generated = {
-      prompt: `Practice (${topic.title}): A store raises a $40 item by 50%, then puts the new price on sale for 50% off. What is the final price, in dollars?`,
-      correctAnswer: "30",
+      prompt: `Practice (${topic.title}): A 2 kg cart is pushed with a net force of 10 newtons. What is its acceleration, in m/s²?`,
+      correctAnswer: "5",
       explanation:
-        "$40 × 1.5 = $60, then $60 × 0.5 = $30. Percentage increases and decreases are not symmetric because the base changes.",
+        "By Newton's second law, F = ma, so a = F/m = 10 N ÷ 2 kg = 5 m/s². Net force causes acceleration in proportion to force and inversely to mass.",
     };
   }
 
@@ -256,7 +256,7 @@ router.post("/practice/sessions/:sessionId/grade", async (req, res): Promise<voi
     try {
       tutorTip = (
         await chatJson<{ tip: string }>(
-          "You are a kind, concise quantitative-reasoning tutor. Given a problem, the correct answer, and the student's wrong attempt, give ONE focused next-step tip (2 sentences max). Respond as strict JSON: {\"tip\": string}.",
+          "You are a kind, concise conceptual-physics tutor. Given a problem, the correct answer, and the student's wrong attempt, give ONE focused next-step tip (2 sentences max). Respond as strict JSON: {\"tip\": string}.",
           JSON.stringify({
             prompt: problem.prompt,
             correctAnswer: problem.correctAnswer,

@@ -13,7 +13,7 @@ export function Scene4({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     // 0-1.5s: Cursor to sidebar "Analytics", clicks. Crossfade.
     // 1.5-4.0s: KPI tiles count up.
     // 4.0-6.0s: Topic Mastery rows stagger in.
-    // 6.0-8.5s: Cursor to "Correlation vs. causation", click.
+    // 6.0-8.5s: Cursor to "Forces and why things accelerate", click.
     // 8.5-10s: Crossfade begins.
 
     setCursorPos({ x: '65vw', y: '90vh' }); // Start where Scene 3 left off
@@ -51,7 +51,7 @@ export function Scene4({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     }, 4000);
 
     const t6 = setTimeout(() => {
-      setCursorPos({ x: '40vw', y: '65vh' }); // Move to Correlation row
+      setCursorPos({ x: '40vw', y: '65vh' }); // Move to Forces row
     }, 6000);
 
     const t7 = setTimeout(() => {
@@ -71,11 +71,11 @@ export function Scene4({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
   }, [setCursorPos, setIsClicking]);
 
   const rows = [
-    { topic: 'What quantitative reasoning is', week: 'Week 1', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
-    { topic: 'Percentages and base rates', week: 'Week 1', att: 1, acc: 1, stat: 'STRONG', statColor: 'text-emerald-700 bg-emerald-50' },
-    { topic: 'Correlation vs. causation', week: 'Week 3', att: 1, acc: 1, stat: 'STRONG', statColor: 'text-emerald-700 bg-emerald-50' },
-    { topic: 'Exponential growth and decay', week: 'Week 2', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
-    { topic: 'Conditional probability', week: 'Week 3', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
+    { topic: 'What physics is', week: 'Week 1', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
+    { topic: 'Energy and its conservation', week: 'Week 1', att: 1, acc: 1, stat: 'STRONG', statColor: 'text-emerald-700 bg-emerald-50' },
+    { topic: 'Forces and why things accelerate', week: 'Week 1', att: 1, acc: 1, stat: 'STRONG', statColor: 'text-emerald-700 bg-emerald-50' },
+    { topic: 'Gravity and the shape of orbits', week: 'Week 2', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
+    { topic: 'Wave-particle duality', week: 'Week 3', att: 0, acc: 0, stat: 'UNTESTED', statColor: 'text-muted-foreground bg-muted' },
   ];
 
   return (
