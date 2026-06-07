@@ -3,6 +3,13 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import path from "node:path";
 import fs from "node:fs";
+import { clerkMiddleware } from "@clerk/express";
+import { publishableKeyFromHost } from "@clerk/shared/keys";
+import {
+  CLERK_PROXY_PATH,
+  clerkProxyMiddleware,
+  getClerkProxyHost,
+} from "./middlewares/clerkProxyMiddleware";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
@@ -27,9 +34,52 @@ app.use(
     },
   }),
 );
-app.use(cors());
+
+// Mount the Clerk proxy before body parsers — it streams raw bytes.
+app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
+
+// Build a strict CORS allowlist. The web app is same-origin with the API via
+// the shared proxy, so cross-origin requests only come from the known Replit
+// domains (prod) or localhost (dev). Reflecting arbitrary origins while
+// allowing credentials would expose authenticated responses cross-origin.
+const allowedOrigins = new Set<string>();
+for (const domain of (process.env.REPLIT_DOMAINS ?? "")
+  .split(",")
+  .map((d) => d.trim())
+  .filter(Boolean)) {
+  allowedOrigins.add(`https://${domain}`);
+}
+if (process.env.NODE_ENV !== "production") {
+  allowedOrigins.add("http://localhost:80");
+  allowedOrigins.add("http://localhost");
+}
+
+app.use(
+  cors({
+    credentials: true,
+    origin(origin, callback) {
+      // Same-origin and non-browser requests have no Origin header.
+      if (!origin || allowedOrigins.has(origin)) {
+        return callback(null, true);
+      }
+      return callback(null, false);
+    },
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Resolve the publishable key from the incoming request host so the same
+// server can serve multiple Clerk custom domains. Falls back to
+// CLERK_PUBLISHABLE_KEY when the host doesn't map to a custom domain.
+app.use(
+  clerkMiddleware((req) => ({
+    publishableKey: publishableKeyFromHost(
+      getClerkProxyHost(req) ?? "",
+      process.env.CLERK_PUBLISHABLE_KEY,
+    ),
+  })),
+);
 
 app.use("/api", router);
 

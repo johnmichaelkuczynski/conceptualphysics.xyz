@@ -1,7 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles } from "lucide-react";
+import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, LogOut } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUser, useClerk } from "@clerk/react";
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+function UserCard() {
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  if (!user) return null;
+
+  const name =
+    user.fullName || user.primaryEmailAddress?.emailAddress || "Account";
+  const initial = (name.trim()[0] || "?").toUpperCase();
+
+  return (
+    <div className="flex items-center gap-3">
+      {user.imageUrl ? (
+        <img
+          src={user.imageUrl}
+          alt={name}
+          className="w-8 h-8 rounded-full object-cover"
+        />
+      ) : (
+        <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
+          {initial}
+        </div>
+      )}
+      <div className="flex-1 min-w-0">
+        <div className="text-sm font-medium truncate" title={name}>
+          {name}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={() => signOut({ redirectUrl: basePath || "/" })}
+        title="Log out"
+        aria-label="Log out"
+        className="p-1.5 rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+        data-testid="button-logout"
+      >
+        <LogOut className="w-4 h-4" />
+      </button>
+    </div>
+  );
+}
 
 export function Sidebar() {
   const [location] = useLocation();
@@ -45,8 +90,11 @@ export function Sidebar() {
         })}
       </div>
 
-      <div className="p-4 border-t border-border text-xs text-muted-foreground text-center">
-        Conceptual Physics MVP
+      <div className="p-4 border-t border-border flex flex-col gap-3">
+        <UserCard />
+        <div className="text-xs text-muted-foreground text-center">
+          Conceptual Physics MVP
+        </div>
       </div>
     </div>
   );
