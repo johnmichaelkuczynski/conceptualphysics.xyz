@@ -297,7 +297,7 @@ export const NextPracticeProblemParams = zod.object({
 })
 
 export const NextPracticeProblemBody = zod.object({
-  "request": zod.string().nullish().describe('Free-form user request, e.g. \"give me harder probability problems\"'),
+  "request": zod.string().nullish().describe('Free-form user request, e.g. \"give me harder momentum problems\"'),
   "topicId": zod.number().nullish()
 })
 
