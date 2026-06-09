@@ -11,11 +11,14 @@ import { publishableKeyFromHost } from "@clerk/react/internal";
 import { shadcn } from "@clerk/themes";
 import {
   QueryClient,
+  QueryCache,
+  MutationCache,
   QueryClientProvider,
   useQueryClient,
 } from "@tanstack/react-query";
 import { useClerk } from "@clerk/react";
 import { Toaster } from "@/components/ui/toaster";
+import { toast } from "@/hooks/use-toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
@@ -55,7 +58,59 @@ if (!clerkPubKey) {
   throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY in .env file");
 }
 
-const queryClient = new QueryClient();
+// Set by AuthExpiryHandler once Clerk is available. Invoked when any API call
+// returns 401 so a stale/expired session lands the user back on sign-in instead
+// of a silently blank page.
+let onAuthExpired: (() => void) | null = null;
+
+function handleQueryError(error: unknown): void {
+  // Only treat 401s from our own API as session expiry — never sign the user
+  // out because of an unrelated request that happens to return 401.
+  const e = error as { status?: number; url?: string } | null;
+  if (e?.status === 401 && typeof e.url === "string" && e.url.includes("/api/")) {
+    onAuthExpired?.();
+  }
+}
+
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({ onError: handleQueryError }),
+  mutationCache: new MutationCache({ onError: handleQueryError }),
+});
+
+// Bridges module-level 401 detection to Clerk + the router. On an expired
+// session it clears stale client state and redirects to sign-in, with a
+// burst-suppression latch so the flood of parallel 401s only triggers once.
+function AuthExpiryHandler() {
+  const clerk = useClerk();
+  const [, setLocation] = useLocation();
+  const firingRef = useRef(false);
+
+  useEffect(() => {
+    onAuthExpired = () => {
+      if (firingRef.current) return;
+      firingRef.current = true;
+      toast({
+        title: "Your session expired",
+        description: "Please sign in again to continue.",
+        variant: "destructive",
+      });
+      clerk
+        .signOut()
+        .catch(() => {})
+        .finally(() => {
+          setLocation("/sign-in");
+          setTimeout(() => {
+            firingRef.current = false;
+          }, 3000);
+        });
+    };
+    return () => {
+      onAuthExpired = null;
+    };
+  }, [clerk, setLocation]);
+
+  return null;
+}
 
 const clerkAppearance = {
   theme: shadcn,
@@ -211,6 +266,7 @@ function ClerkProviderWithRoutes() {
     >
       <QueryClientProvider client={queryClient}>
         <ClerkQueryClientCacheInvalidator />
+        <AuthExpiryHandler />
         <TooltipProvider>
           <Switch>
             <Route path="/" component={HomeRoute} />

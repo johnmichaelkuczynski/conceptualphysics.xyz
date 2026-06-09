@@ -24,3 +24,21 @@ malicious site read authenticated responses cross-origin. Flagged in code review
 and non-browser requests (no `Origin` header) are allowed through. Verify with
 `curl -H "Origin: https://evil.example.com"` — the response must have NO
 `Access-Control-Allow-Origin` header.
+
+## Expired session = silent blank page unless 401 is handled globally
+
+When the Clerk session cookie expires, the Clerk *client* can still report
+`signed-in` (so `<Show when="signed-in">` keeps rendering protected pages), while
+every API call returns 401. The list query then resolves to empty/undefined and
+the page renders blank with no error — looks like a bug, is actually expiry.
+
+**Rule:** the web QueryClient must have a global `QueryCache`/`MutationCache`
+`onError` that, on a 401 *from our API* (`error.status === 401` AND
+`error.url` includes `/api/`), signs the user out of Clerk and redirects to
+`/sign-in`. Narrow to our API URL so an unrelated 401 never force-signs-out.
+
+**Why:** silent blank pages on session expiry read as broken; symptom is API
+logs flipping from `304`/`200` to a steady stream of `401` while the UI shell
+still renders. Use a short latch so a burst of parallel 401s triggers one
+sign-out, not a flood.
+
