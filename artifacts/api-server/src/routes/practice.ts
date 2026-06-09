@@ -3,6 +3,7 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import {
   db,
   topicsTable,
+  problemsTable,
   practiceSessionsTable,
   practiceProblemsTable,
   practiceAttemptsTable,
@@ -69,7 +70,7 @@ router.post("/practice/sessions", async (req, res): Promise<void> => {
     res.status(400).json({ error: parsed.error.message });
     return;
   }
-  const { weekNumber, topicId, tutorEnabled, focusOnWeaknesses, initialDifficulty } =
+  const { weekNumber, topicId, assignmentId, tutorEnabled, focusOnWeaknesses, initialDifficulty } =
     parsed.data;
   const startDifficulty =
     typeof initialDifficulty === "number" && !Number.isNaN(initialDifficulty)
@@ -80,6 +81,7 @@ router.post("/practice/sessions", async (req, res): Promise<void> => {
     .values({
       weekNumber: weekNumber ?? null,
       topicId: topicId ?? null,
+      assignmentId: assignmentId ?? null,
       tutorEnabled,
       focusOnWeaknesses: focusOnWeaknesses ?? true,
       difficulty: startDifficulty,
@@ -96,6 +98,7 @@ router.post("/practice/sessions", async (req, res): Promise<void> => {
       difficulty: created.difficulty,
       weekNumber: created.weekNumber,
       topicId: created.topicId,
+      assignmentId: created.assignmentId,
       focusOnWeaknesses: created.focusOnWeaknesses,
     }),
   );
@@ -117,23 +120,39 @@ router.post("/practice/sessions/:sessionId/next", async (req, res): Promise<void
     return;
   }
 
+  // Assignment-scoped practice: never reuse the real graded prompts, and mirror the
+  // assignment's own topic set when the caller doesn't pin a specific topic.
+  let bannedPrompts: string[] = [];
+  let assignmentTopicIds: number[] = [];
+  if (session.assignmentId != null) {
+    const aProblems = await db
+      .select({ prompt: problemsTable.prompt, topicId: problemsTable.topicId })
+      .from(problemsTable)
+      .where(eq(problemsTable.assignmentId, session.assignmentId));
+    bannedPrompts = aProblems.map((p) => p.prompt);
+    assignmentTopicIds = [...new Set(aProblems.map((p) => p.topicId))];
+  }
+
+  let preferredTopic = parsed.data.topicId ?? session.topicId;
+  if (preferredTopic == null && assignmentTopicIds.length > 0) {
+    preferredTopic =
+      assignmentTopicIds[Math.floor(Math.random() * assignmentTopicIds.length)]!;
+  }
+
   const topic = await pickTopicId(
     session.weekNumber,
-    parsed.data.topicId ?? session.topicId,
+    preferredTopic,
     session.focusOnWeaknesses,
   );
 
-  const lastProblems = await db
+  // Avoid repeats across the whole session (not just this topic) plus every real graded prompt.
+  const recent = await db
     .select({ prompt: practiceProblemsTable.prompt })
     .from(practiceProblemsTable)
-    .where(
-      and(
-        eq(practiceProblemsTable.sessionId, sessionId),
-        eq(practiceProblemsTable.topicId, topic.id),
-      ),
-    )
+    .where(eq(practiceProblemsTable.sessionId, sessionId))
     .orderBy(desc(practiceProblemsTable.id))
-    .limit(3);
+    .limit(12);
+  const avoidPrompts = [...recent.map((p) => p.prompt), ...bannedPrompts];
 
   const difficulty = Math.max(1, Math.min(5, session.difficulty));
   const difficultyLabel =
@@ -147,24 +166,45 @@ router.post("/practice/sessions/:sessionId/next", async (req, res): Promise<void
       ? "hard"
       : "challenging";
 
+  // Hard guarantee that practice never reuses a real graded prompt (or a recent one):
+  // the LLM hint is best-effort, so we also reject collisions and regenerate.
+  const normalize = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9 ]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  const bannedNorm = new Set(avoidPrompts.map(normalize));
+
   const userRequest = parsed.data.request?.trim() || "";
-  let generated: { prompt: string; correctAnswer: string; explanation: string };
-  try {
-    generated = await chatJson<{
-      prompt: string;
-      correctAnswer: string;
-      explanation: string;
-    }>(
-      `You generate a single conceptual-physics practice problem for a college freshman. The problem MUST be on the topic "${topic.title}" and at difficulty "${difficultyLabel}" (${difficulty.toFixed(
-        1,
-      )}/5). Favor conceptual understanding over heavy algebra; simple arithmetic or a single equation like F=ma is fine, but the focus is on physical reasoning. The answer must be a short string (a single word, short phrase, number, or letter choice) — never multi-paragraph. Respond as strict JSON: {"prompt": string, "correctAnswer": string, "explanation": string}. Avoid these recent prompts: ${JSON.stringify(
-        lastProblems.map((p) => p.prompt),
-      )}.`,
-      userRequest || `Generate a new ${difficultyLabel} problem on ${topic.title}.`,
-    );
-  } catch {
+  let generated: { prompt: string; correctAnswer: string; explanation: string } | null = null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    let candidate: { prompt: string; correctAnswer: string; explanation: string };
+    try {
+      candidate = await chatJson<{
+        prompt: string;
+        correctAnswer: string;
+        explanation: string;
+      }>(
+        `You generate a single conceptual-physics practice problem for a college freshman. The problem MUST be on the topic "${topic.title}" and at difficulty "${difficultyLabel}" (${difficulty.toFixed(
+          1,
+        )}/5). Favor conceptual understanding over heavy algebra; simple arithmetic or a single equation like F=ma is fine, but the focus is on physical reasoning. The answer must be a short string (a single word, short phrase, number, or letter choice) — never multi-paragraph. Respond as strict JSON: {"prompt": string, "correctAnswer": string, "explanation": string}. You MUST NOT reproduce, copy, or lightly reword any of these forbidden questions (they are the real graded questions and recently shown practice — generate something genuinely different that tests the same concept): ${JSON.stringify(
+          avoidPrompts,
+        )}.`,
+        userRequest || `Generate a new ${difficultyLabel} problem on ${topic.title}.`,
+      );
+    } catch {
+      break;
+    }
+    if (!bannedNorm.has(normalize(candidate.prompt))) {
+      generated = candidate;
+      break;
+    }
+  }
+  if (!generated) {
+    // Deterministic fallback, tagged so it can never collide with a graded prompt.
     generated = {
-      prompt: `Practice (${topic.title}): A 2 kg cart is pushed with a net force of 10 newtons. What is its acceleration, in m/s²?`,
+      prompt: `Practice (${topic.title}) [${Date.now().toString(36)}]: A 2 kg cart is pushed with a net force of 10 newtons. What is its acceleration, in m/s²?`,
       correctAnswer: "5",
       explanation:
         "By Newton's second law, F = ma, so a = F/m = 10 N ÷ 2 kg = 5 m/s². Net force causes acceleration in proportion to force and inversely to mass.",
@@ -252,15 +292,19 @@ router.post("/practice/sessions/:sessionId/grade", async (req, res): Promise<voi
     .where(eq(practiceSessionsTable.id, sessionId));
 
   let tutorTip: string | null = null;
-  if (session.tutorEnabled && !graded.correct) {
+  if (session.tutorEnabled) {
+    const sys = graded.correct
+      ? 'You are a kind, concise conceptual-physics tutor. The student just answered correctly. In 2 sentences max, reinforce WHY their reasoning works and name one related idea or common trap to stay sharp on for the graded version. Respond as strict JSON: {"tip": string}.'
+      : 'You are a kind, concise conceptual-physics tutor. Given a problem, the correct answer, and the student\'s wrong attempt, give ONE focused next-step tip that names the specific concept to review (2 sentences max). Respond as strict JSON: {"tip": string}.';
     try {
       tutorTip = (
         await chatJson<{ tip: string }>(
-          "You are a kind, concise conceptual-physics tutor. Given a problem, the correct answer, and the student's wrong attempt, give ONE focused next-step tip (2 sentences max). Respond as strict JSON: {\"tip\": string}.",
+          sys,
           JSON.stringify({
             prompt: problem.prompt,
             correctAnswer: problem.correctAnswer,
             studentAnswer: answer,
+            wasCorrect: graded.correct,
           }),
         )
       ).tip;

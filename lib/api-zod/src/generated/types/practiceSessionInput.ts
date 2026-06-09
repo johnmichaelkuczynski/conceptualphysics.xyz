@@ -11,6 +11,11 @@ export interface PracticeSessionInput {
   weekNumber?: number | null;
   /** @nullable */
   topicId?: number | null;
+  /**
+     * If set, the session is scoped to a graded assignment — problems mirror its topics and never reuse its actual graded prompts.
+     * @nullable
+     */
+  assignmentId?: number | null;
   tutorEnabled: boolean;
   focusOnWeaknesses?: boolean;
   /**

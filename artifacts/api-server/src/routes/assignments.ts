@@ -15,6 +15,7 @@ import {
   StartAssignmentAttemptResponse,
   GetAttemptResponse,
   SubmitAttemptResponse,
+  GetAssignmentReadinessResponse,
 } from "@workspace/api-zod";
 import { gradeAnswer } from "../lib/grading";
 import { detect } from "../lib/detection";
@@ -105,6 +106,124 @@ router.get("/assignments/:assignmentId", async (req, res): Promise<void> => {
       timeLimitMinutes: a.timeLimitMinutes,
       instructions: a.instructions,
       problems,
+    }),
+  );
+});
+
+router.get("/assignments/:assignmentId/readiness", async (req, res): Promise<void> => {
+  const id = parseIdParam(req.params.assignmentId);
+  if (!Number.isFinite(id)) {
+    res.status(400).json({ error: "invalid id" });
+    return;
+  }
+  const [a] = await db.select().from(assignmentsTable).where(eq(assignmentsTable.id, id));
+  if (!a) {
+    res.status(404).json({ error: "not found" });
+    return;
+  }
+
+  // The assignment's distinct topic set, with titles.
+  const aProblems = await db
+    .select({ topicId: problemsTable.topicId, topicTitle: topicsTable.title })
+    .from(problemsTable)
+    .leftJoin(topicsTable, eq(problemsTable.topicId, topicsTable.id))
+    .where(eq(problemsTable.assignmentId, id));
+  const topicMap = new Map<number, string>();
+  for (const p of aProblems) {
+    if (!topicMap.has(p.topicId)) topicMap.set(p.topicId, p.topicTitle ?? `Topic ${p.topicId}`);
+  }
+  const topicIds = [...topicMap.keys()];
+
+  // Practice accuracy per topic, drawn from every logged practice attempt on those topics.
+  const stats = await db.execute(sql`
+    select topic_id, count(*)::int as n, avg(case when correct then 1.0 else 0.0 end) as acc
+    from practice_attempts
+    where topic_id = any(${topicIds.length ? topicIds : [-1]})
+    group by topic_id
+  `);
+  const byId = new Map<number, { n: number; acc: number }>();
+  for (const r of stats.rows as Array<{ topic_id: number; n: number; acc: number }>) {
+    byId.set(Number(r.topic_id), { n: Number(r.n), acc: Number(r.acc) });
+  }
+
+  const TARGET = 3; // practice attempts per topic considered "well covered"
+  const topics = topicIds.map((tid) => {
+    const s = byId.get(tid);
+    const attempts = s?.n ?? 0;
+    const accuracy = attempts > 0 ? s!.acc : 0;
+    const strengthLabel =
+      attempts === 0
+        ? "untested"
+        : accuracy >= 0.85
+        ? "strong"
+        : accuracy >= 0.7
+        ? "solid"
+        : accuracy >= 0.5
+        ? "developing"
+        : "weak";
+    return { topicId: tid, topicTitle: topicMap.get(tid)!, attempts, accuracy, strengthLabel };
+  });
+
+  const practiceCount = topics.reduce((sum, t) => sum + t.attempts, 0);
+  const readinessScore =
+    topics.length === 0
+      ? 0
+      : Math.round(
+          (topics.reduce((sum, t) => sum + t.accuracy * Math.min(1, t.attempts / TARGET), 0) /
+            topics.length) *
+            100,
+        );
+  const verdict =
+    readinessScore >= 80 ? "ready" : readinessScore >= 50 ? "getting_there" : "not_ready";
+
+  const pointers: string[] = [];
+  const untested = topics.filter((t) => t.attempts === 0);
+  const weak = topics
+    .filter((t) => t.attempts > 0 && t.accuracy < 0.6)
+    .sort((x, y) => x.accuracy - y.accuracy);
+  const under = topics.filter((t) => t.attempts > 0 && t.attempts < TARGET && t.accuracy >= 0.6);
+
+  if (practiceCount === 0) {
+    pointers.push(
+      `You haven't logged any practice for "${a.title}" yet. Run a practice set first — it never shows the real graded questions, so drill as much as you want before the graded ${a.kind}.`,
+    );
+  }
+  for (const t of untested.slice(0, 4)) {
+    pointers.push(
+      `Untested: 0 practice problems on "${t.topicTitle}". Do a few before the graded ${a.kind}.`,
+    );
+  }
+  for (const t of weak.slice(0, 4)) {
+    pointers.push(
+      `Weak spot: ${Math.round(t.accuracy * 100)}% on "${t.topicTitle}" across ${t.attempts} attempt(s). Re-read that lecture section and re-drill this topic.`,
+    );
+  }
+  for (const t of under.slice(0, 3)) {
+    pointers.push(
+      `Almost there on "${t.topicTitle}" (${Math.round(t.accuracy * 100)}%) but only ${t.attempts} attempt(s) — practice a few more to lock it in.`,
+    );
+  }
+  if (verdict === "ready" && pointers.length === 0) {
+    pointers.push(
+      `Strong, well-practiced accuracy across every topic in "${a.title}". You're ready for the graded ${a.kind} — go for it.`,
+    );
+  }
+  if (pointers.length === 0) {
+    pointers.push(
+      `Keep practicing the topics above to push your readiness higher before attempting the graded ${a.kind}.`,
+    );
+  }
+
+  res.json(
+    GetAssignmentReadinessResponse.parse({
+      assignmentId: a.id,
+      title: a.title,
+      kind: a.kind as "homework" | "test" | "midterm" | "final",
+      readinessScore,
+      verdict,
+      practiceCount,
+      topics,
+      pointers,
     }),
   );
 });

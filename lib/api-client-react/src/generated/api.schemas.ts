@@ -198,11 +198,67 @@ export interface AttemptResult {
   detection: DetectionResult[];
 }
 
+export type AssignmentReadinessKind = typeof AssignmentReadinessKind[keyof typeof AssignmentReadinessKind];
+
+
+export const AssignmentReadinessKind = {
+  homework: 'homework',
+  test: 'test',
+  midterm: 'midterm',
+  final: 'final',
+} as const;
+
+export type AssignmentReadinessVerdict = typeof AssignmentReadinessVerdict[keyof typeof AssignmentReadinessVerdict];
+
+
+export const AssignmentReadinessVerdict = {
+  not_ready: 'not_ready',
+  getting_there: 'getting_there',
+  ready: 'ready',
+} as const;
+
+export type ReadinessTopicStrengthLabel = typeof ReadinessTopicStrengthLabel[keyof typeof ReadinessTopicStrengthLabel];
+
+
+export const ReadinessTopicStrengthLabel = {
+  strong: 'strong',
+  solid: 'solid',
+  developing: 'developing',
+  weak: 'weak',
+  untested: 'untested',
+} as const;
+
+export interface ReadinessTopic {
+  topicId: number;
+  topicTitle: string;
+  attempts: number;
+  accuracy: number;
+  strengthLabel: ReadinessTopicStrengthLabel;
+}
+
+export interface AssignmentReadiness {
+  assignmentId: number;
+  title: string;
+  kind: AssignmentReadinessKind;
+  /** 0-100 readiness estimate from practice accuracy + coverage */
+  readinessScore: number;
+  verdict: AssignmentReadinessVerdict;
+  /** Total practice attempts logged on this assignment's topics */
+  practiceCount: number;
+  topics: ReadinessTopic[];
+  pointers: string[];
+}
+
 export interface PracticeSessionInput {
   /** @nullable */
   weekNumber?: number | null;
   /** @nullable */
   topicId?: number | null;
+  /**
+     * If set, the session is scoped to a graded assignment — problems mirror its topics and never reuse its actual graded prompts.
+     * @nullable
+     */
+  assignmentId?: number | null;
   tutorEnabled: boolean;
   focusOnWeaknesses?: boolean;
   /**
@@ -220,6 +276,8 @@ export interface PracticeSession {
   weekNumber: number | null;
   /** @nullable */
   topicId?: number | null;
+  /** @nullable */
+  assignmentId?: number | null;
   focusOnWeaknesses?: boolean;
 }
 
@@ -263,6 +321,11 @@ export interface TutorAskInput {
   message: string;
   /** @nullable */
   selectedLectureText?: string | null;
+  /**
+     * Extra grounding context, e.g. the current practice problem, the student's answer, and the feedback they're asking about.
+     * @nullable
+     */
+  context?: string | null;
   /** @nullable */
   lectureId?: number | null;
   /** @nullable */

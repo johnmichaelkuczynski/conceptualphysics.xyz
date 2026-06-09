@@ -28,6 +28,7 @@ import LectureView from "@/pages/LectureView";
 import AssignmentRunner from "@/pages/AssignmentRunner";
 import Diagnostics from "@/pages/Diagnostics";
 import TopicPractice from "@/pages/TopicPractice";
+import AssignmentPractice from "@/pages/AssignmentPractice";
 
 // REQUIRED — copy verbatim. Resolves the key from window.location.hostname so the
 // same build serves multiple Clerk custom domains.
@@ -218,6 +219,11 @@ function ClerkProviderWithRoutes() {
             <Route path="/assignments">
               <Protected>
                 <Assignments />
+              </Protected>
+            </Route>
+            <Route path="/assignments/:id/practice">
+              <Protected>
+                <AssignmentPractice />
               </Protected>
             </Route>
             <Route path="/assignments/:id">

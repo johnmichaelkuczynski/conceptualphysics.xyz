@@ -158,6 +158,15 @@ export default function AssignmentRunner() {
           )}
         </div>
 
+        <div className="rounded-md border border-primary/30 bg-primary/5 p-3 text-sm flex items-center justify-between gap-3 flex-wrap">
+          <span className="text-foreground/90">
+            This is the <span className="font-semibold">graded {assignment.kind}</span> — no tutor, and it counts. Want to warm up first?
+          </span>
+          <Link href={`/assignments/${assignmentId}/practice`}>
+            <Button variant="secondary" size="sm">∞ Practice this {assignment.kind} first</Button>
+          </Link>
+        </div>
+
         {currentProblem ? (
           <div className="flex flex-col gap-8">
             <div className="prose prose-slate dark:prose-invert max-w-none text-lg">

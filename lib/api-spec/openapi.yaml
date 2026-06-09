@@ -211,6 +211,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/AttemptResult"
 
+  /assignments/{assignmentId}/readiness:
+    get:
+      operationId: getAssignmentReadiness
+      tags: [assignments]
+      summary: Analytics-based readiness pointers for an assignment (from logged practice)
+      parameters:
+        - name: assignmentId
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignmentReadiness"
+
   /practice/sessions:
     post:
       operationId: startPracticeSession
@@ -559,12 +577,53 @@ components:
         correctAnswer: { type: string }
         explanation: { type: string }
 
+    AssignmentReadiness:
+      type: object
+      required: [assignmentId, title, kind, readinessScore, verdict, practiceCount, topics, pointers]
+      properties:
+        assignmentId: { type: integer }
+        title: { type: string }
+        kind:
+          type: string
+          enum: [homework, test, midterm, final]
+        readinessScore:
+          type: number
+          description: 0-100 readiness estimate from practice accuracy + coverage
+        verdict:
+          type: string
+          enum: [not_ready, getting_there, ready]
+        practiceCount:
+          type: integer
+          description: Total practice attempts logged on this assignment's topics
+        topics:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReadinessTopic"
+        pointers:
+          type: array
+          items: { type: string }
+
+    ReadinessTopic:
+      type: object
+      required: [topicId, topicTitle, attempts, accuracy, strengthLabel]
+      properties:
+        topicId: { type: integer }
+        topicTitle: { type: string }
+        attempts: { type: integer }
+        accuracy: { type: number }
+        strengthLabel:
+          type: string
+          enum: [strong, solid, developing, weak, untested]
+
     PracticeSessionInput:
       type: object
       required: [tutorEnabled]
       properties:
         weekNumber: { type: ["integer", "null"] }
         topicId: { type: ["integer", "null"] }
+        assignmentId:
+          type: ["integer", "null"]
+          description: If set, the session is scoped to a graded assignment — problems mirror its topics and never reuse its actual graded prompts.
         tutorEnabled: { type: boolean }
         focusOnWeaknesses: { type: boolean, default: true }
         initialDifficulty:
@@ -580,6 +639,7 @@ components:
         difficulty: { type: number }
         weekNumber: { type: ["integer", "null"] }
         topicId: { type: ["integer", "null"] }
+        assignmentId: { type: ["integer", "null"] }
         focusOnWeaknesses: { type: boolean }
 
     NextProblemInput:
@@ -627,6 +687,9 @@ components:
         sessionId: { type: ["integer", "null"] }
         message: { type: string }
         selectedLectureText: { type: ["string", "null"] }
+        context:
+          type: ["string", "null"]
+          description: Extra grounding context, e.g. the current practice problem, the student's answer, and the feedback they're asking about.
         lectureId: { type: ["integer", "null"] }
         problemId: { type: ["integer", "null"] }
 

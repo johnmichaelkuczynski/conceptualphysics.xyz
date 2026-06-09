@@ -26,6 +26,7 @@ import type {
   AnswerInput,
   AnswerSaved,
   Assignment,
+  AssignmentReadiness,
   AssignmentSummary,
   AttemptResult,
   AttemptState,
@@ -886,6 +887,83 @@ export const useSubmitAttempt = <TError = ErrorType<unknown>,
       > => {
       return useMutation(getSubmitAttemptMutationOptions(options));
     }
+
+export const getGetAssignmentReadinessUrl = (assignmentId: number,) => {
+
+
+
+
+  return `/api/assignments/${assignmentId}/readiness`
+}
+
+/**
+ * @summary Analytics-based readiness pointers for an assignment (from logged practice)
+ */
+export const getAssignmentReadiness = async (assignmentId: number, options?: RequestInit): Promise<AssignmentReadiness> => {
+
+  return customFetch<AssignmentReadiness>(getGetAssignmentReadinessUrl(assignmentId),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetAssignmentReadinessQueryKey = (assignmentId: number,) => {
+    return [
+    `/api/assignments/${assignmentId}/readiness`
+    ] as const;
+    }
+
+
+export const getGetAssignmentReadinessQueryOptions = <TData = Awaited<ReturnType<typeof getAssignmentReadiness>>, TError = ErrorType<unknown>>(assignmentId: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getAssignmentReadiness>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetAssignmentReadinessQueryKey(assignmentId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getAssignmentReadiness>>> = ({ signal }) => getAssignmentReadiness(assignmentId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: !!(assignmentId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getAssignmentReadiness>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetAssignmentReadinessQueryResult = NonNullable<Awaited<ReturnType<typeof getAssignmentReadiness>>>
+export type GetAssignmentReadinessQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Analytics-based readiness pointers for an assignment (from logged practice)
+ */
+
+export function useGetAssignmentReadiness<TData = Awaited<ReturnType<typeof getAssignmentReadiness>>, TError = ErrorType<unknown>>(
+ assignmentId: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getAssignmentReadiness>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetAssignmentReadinessQueryOptions(assignmentId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
 
 export const getStartPracticeSessionUrl = () => {
 

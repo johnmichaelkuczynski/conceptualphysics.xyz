@@ -42,13 +42,23 @@ router.post("/tutor/ask", async (req, res): Promise<void> => {
     res.status(400).json({ error: parsed.error.message });
     return;
   }
-  const { message, selectedLectureText } = parsed.data;
+  const { message, selectedLectureText, context } = parsed.data;
 
   const sys =
     "You are an encouraging college conceptual-physics tutor. Explain step by step, use clear physical intuition and concrete everyday examples, and name the relevant concepts (forces, energy, momentum, fields, waves, entropy, relativity, quantum behavior) where helpful. Favor conceptual understanding over heavy algebra, but use simple equations like F=ma or E=mc² when they illuminate the idea. Keep replies short (3-6 sentences) unless the student asks for more detail. Never just give the answer — guide them.";
-  const user = selectedLectureText
-    ? `Context from the lecture the student is reading:\n"""\n${selectedLectureText}\n"""\n\nStudent question: ${message}`
-    : message;
+  const blocks: string[] = [];
+  if (selectedLectureText) {
+    blocks.push(
+      `Context from the lecture the student is reading:\n"""\n${selectedLectureText}\n"""`,
+    );
+  }
+  if (context) {
+    blocks.push(
+      `The student is in a practice session. Here is the problem they just worked, their answer, and the feedback they're discussing:\n"""\n${context}\n"""`,
+    );
+  }
+  blocks.push(`Student question: ${message}`);
+  const user = blocks.join("\n\n");
 
   let text = "";
   try {

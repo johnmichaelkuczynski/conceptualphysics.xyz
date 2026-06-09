@@ -12,6 +12,11 @@ export interface TutorAskInput {
   message: string;
   /** @nullable */
   selectedLectureText?: string | null;
+  /**
+     * Extra grounding context, e.g. the current practice problem, the student's answer, and the feedback they're asking about.
+     * @nullable
+     */
+  context?: string | null;
   /** @nullable */
   lectureId?: number | null;
   /** @nullable */

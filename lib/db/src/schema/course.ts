@@ -96,6 +96,7 @@ export const practiceSessionsTable = pgTable("practice_sessions", {
   id: serial("id").primaryKey(),
   weekNumber: integer("week_number"),
   topicId: integer("topic_id"),
+  assignmentId: integer("assignment_id"),
   tutorEnabled: boolean("tutor_enabled").notNull().default(false),
   focusOnWeaknesses: boolean("focus_on_weaknesses").notNull().default(true),
   difficulty: doublePrecision("difficulty").notNull().default(2.0),

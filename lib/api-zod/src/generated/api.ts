@@ -267,6 +267,31 @@ export const SubmitAttemptResponse = zod.object({
 
 
 /**
+ * @summary Analytics-based readiness pointers for an assignment (from logged practice)
+ */
+export const GetAssignmentReadinessParams = zod.object({
+  "assignmentId": zod.coerce.number()
+})
+
+export const GetAssignmentReadinessResponse = zod.object({
+  "assignmentId": zod.number(),
+  "title": zod.string(),
+  "kind": zod.enum(['homework', 'test', 'midterm', 'final']),
+  "readinessScore": zod.number().describe('0-100 readiness estimate from practice accuracy + coverage'),
+  "verdict": zod.enum(['not_ready', 'getting_there', 'ready']),
+  "practiceCount": zod.number().describe('Total practice attempts logged on this assignment\'s topics'),
+  "topics": zod.array(zod.object({
+  "topicId": zod.number(),
+  "topicTitle": zod.string(),
+  "attempts": zod.number(),
+  "accuracy": zod.number(),
+  "strengthLabel": zod.enum(['strong', 'solid', 'developing', 'weak', 'untested'])
+})),
+  "pointers": zod.array(zod.string())
+})
+
+
+/**
  * @summary Start a new practice session (infinite, adaptive)
  */
 export const startPracticeSessionBodyFocusOnWeaknessesDefault = true;
@@ -274,6 +299,7 @@ export const startPracticeSessionBodyFocusOnWeaknessesDefault = true;
 export const StartPracticeSessionBody = zod.object({
   "weekNumber": zod.number().nullish(),
   "topicId": zod.number().nullish(),
+  "assignmentId": zod.number().nullish().describe('If set, the session is scoped to a graded assignment — problems mirror its topics and never reuse its actual graded prompts.'),
   "tutorEnabled": zod.boolean(),
   "focusOnWeaknesses": zod.boolean().default(startPracticeSessionBodyFocusOnWeaknessesDefault),
   "initialDifficulty": zod.number().nullish().describe('Starting difficulty 1-5; if omitted defaults to 2.0')
@@ -285,6 +311,7 @@ export const StartPracticeSessionResponse = zod.object({
   "difficulty": zod.number(),
   "weekNumber": zod.number().nullable(),
   "topicId": zod.number().nullish(),
+  "assignmentId": zod.number().nullish(),
   "focusOnWeaknesses": zod.boolean().optional()
 })
 
@@ -351,6 +378,7 @@ export const AskTutorBody = zod.object({
   "sessionId": zod.number().nullish(),
   "message": zod.string(),
   "selectedLectureText": zod.string().nullish(),
+  "context": zod.string().nullish().describe('Extra grounding context, e.g. the current practice problem, the student\'s answer, and the feedback they\'re asking about.'),
   "lectureId": zod.number().nullish(),
   "problemId": zod.number().nullish()
 })

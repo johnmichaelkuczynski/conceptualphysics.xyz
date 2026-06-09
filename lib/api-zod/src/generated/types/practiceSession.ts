@@ -14,5 +14,7 @@ export interface PracticeSession {
   weekNumber: number | null;
   /** @nullable */
   topicId?: number | null;
+  /** @nullable */
+  assignmentId?: number | null;
   focusOnWeaknesses?: boolean;
 }

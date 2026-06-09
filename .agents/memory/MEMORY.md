@@ -1,3 +1,4 @@
 - [Course subject migration](course-subject-migration.md) — rebranding/subject-swapping this AI-course app touches far more than seed.ts; checklist of the non-obvious surfaces.
 - [video-js scene import quirk](video-js-scene-imports.md) — DESIGN subagent's generated scene files import animations with an off-by-one relative path; fix with the `@/lib/video` alias.
+- [Assignment practice never-reuse](assignment-practice-exclusion.md) — "generate something different from a known set" needs a server-side normalized collision check + regen loop, not just an LLM hint.
 - [Clerk web auth + CORS](clerk-auth-cors.md) — web auth is same-origin Clerk session cookies via the proxy; API CORS must be a strict allowlist, never `origin: true`.
