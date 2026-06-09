@@ -22,9 +22,6 @@ export default function Assignments() {
         <div>
           <h1 className="text-3xl font-serif font-bold text-primary mb-2">Assignments</h1>
           <p className="text-muted-foreground">Complete your homework, tests, midterm, and final exams.</p>
-          <p className="text-sm text-muted-foreground mt-2">
-            💡 Every assignment has an <span className="font-semibold text-foreground">unlimited practice</span> version — all-new problems on the same topics (never the real graded ones), with the live tutor and readiness pointers. Practice first, then take the graded version.
-          </p>
         </div>
 
         {isLoading ? (
@@ -66,16 +63,19 @@ export default function Assignments() {
                         </div>
                         <div className="flex flex-col gap-2">
                           <Link href={`/assignments/${item.id}/practice`}>
-                            <Button className="w-full" variant="secondary">
-                              ∞ Practice (unlimited)
+                            <Button className="w-full">
+                              ∞ Practice this first
                             </Button>
                           </Link>
                           <Link href={`/assignments/${item.id}`}>
-                            <Button className="w-full" variant={item.status === 'submitted' ? "outline" : "default"}>
-                              {item.status === 'submitted' ? 'Review Results' :
-                               item.status === 'in_progress' ? 'Resume graded' : 'Start graded'}
+                            <Button className="w-full" variant="outline">
+                              {item.status === 'submitted' ? 'Review results' :
+                               item.status === 'in_progress' ? 'Resume graded attempt' : 'Take it for a grade'}
                             </Button>
                           </Link>
+                          <p className="text-xs text-center text-muted-foreground leading-snug">
+                            Practice is infinite and never graded. The graded attempt counts.
+                          </p>
                         </div>
                       </CardContent>
                     </Card>
