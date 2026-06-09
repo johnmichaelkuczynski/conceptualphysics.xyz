@@ -14,9 +14,10 @@ import { useParams, Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { AnswerInput } from "@/components/AnswerInput";
+import { MathKeyboard } from "@/components/MathKeyboard";
 import { StarterQuestionCard } from "@/components/StarterQuestionCard";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageSquare, Sparkles, Send, X, RefreshCw, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft, MessageSquare, Sparkles, Send, X, RefreshCw, CheckCircle2, XCircle, Calculator, ChevronDown, ChevronUp } from "lucide-react";
 
 type ChatMsg = { role: "user" | "tutor"; text: string };
 
@@ -217,6 +218,82 @@ function TutorPane({
   const [input, setInput] = useState("");
   const ask = useAskTutor();
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const selRef = useRef<{ start: number; end: number } | null>(null);
+  const [showKeyboard, setShowKeyboard] = useState(false);
+
+  function rememberSelection() {
+    const ta = textareaRef.current;
+    if (ta) selRef.current = { start: ta.selectionStart ?? 0, end: ta.selectionEnd ?? 0 };
+  }
+
+  function insertAtCursor(text: string) {
+    if (!text) return;
+    const ta = textareaRef.current;
+    const sel = selRef.current;
+    setInput((current) => {
+      let next: string;
+      let caret: number;
+      if (sel) {
+        const start = Math.min(sel.start, current.length);
+        const end = Math.min(sel.end, current.length);
+        next = current.slice(0, start) + text + current.slice(end);
+        caret = start + text.length;
+      } else {
+        next = current + text;
+        caret = next.length;
+      }
+      selRef.current = { start: caret, end: caret };
+      requestAnimationFrame(() => {
+        if (!ta) return;
+        ta.focus();
+        try {
+          ta.setSelectionRange(caret, caret);
+        } catch {}
+      });
+      return next;
+    });
+  }
+
+  function backspaceAtCursor() {
+    const ta = textareaRef.current;
+    const sel = selRef.current;
+    setInput((current) => {
+      let next: string;
+      let caret: number;
+      if (sel) {
+        const start = Math.min(sel.start, current.length);
+        const end = Math.min(sel.end, current.length);
+        if (start === end) {
+          if (start === 0) return current;
+          next = current.slice(0, start - 1) + current.slice(end);
+          caret = start - 1;
+        } else {
+          next = current.slice(0, start) + current.slice(end);
+          caret = start;
+        }
+      } else {
+        if (current.length === 0) return current;
+        next = current.slice(0, -1);
+        caret = next.length;
+      }
+      selRef.current = { start: caret, end: caret };
+      requestAnimationFrame(() => {
+        if (!ta) return;
+        ta.focus();
+        try {
+          ta.setSelectionRange(caret, caret);
+        } catch {}
+      });
+      return next;
+    });
+  }
+
+  function clearAll() {
+    selRef.current = { start: 0, end: 0 };
+    setInput("");
+    requestAnimationFrame(() => textareaRef.current?.focus());
+  }
 
   // Preloaded starter questions for this lecture
   const [suggestions, setSuggestions] = useState<string[] | null>(null);
@@ -301,24 +378,49 @@ function TutorPane({
 
   return (
     <div className="flex-1 flex flex-col min-h-0">
-      <div className="border-b border-border bg-background p-3 flex gap-2 items-end">
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              send();
-            }
-          }}
-          placeholder={placeholder}
-          rows={4}
-          className="flex-1 bg-secondary border-none rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary resize-y min-h-[96px] max-h-[280px]"
-          data-testid="input-tutor-question"
-        />
-        <Button size="lg" onClick={send} disabled={!input.trim() || ask.isPending}>
-          <Send className="w-4 h-4" />
-        </Button>
+      <div className="border-b border-border bg-background p-3 flex flex-col gap-2">
+        <div className="flex gap-2 items-end">
+          <textarea
+            ref={textareaRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onSelect={rememberSelection}
+            onKeyUp={rememberSelection}
+            onClick={rememberSelection}
+            onBlur={rememberSelection}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                send();
+              }
+            }}
+            placeholder={placeholder}
+            rows={4}
+            className="flex-1 bg-secondary border-none rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary resize-y min-h-[96px] max-h-[280px]"
+            data-testid="input-tutor-question"
+          />
+          <Button size="lg" onClick={send} disabled={!input.trim() || ask.isPending}>
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowKeyboard((v) => !v)}
+          className="self-start inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+          data-testid="button-toggle-math-keyboard"
+          aria-expanded={showKeyboard}
+        >
+          <Calculator className="w-3.5 h-3.5" />
+          Math keyboard
+          {showKeyboard ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+        </button>
+        {showKeyboard && (
+          <MathKeyboard
+            onInsert={insertAtCursor}
+            onBackspace={backspaceAtCursor}
+            onClear={clearAll}
+          />
+        )}
       </div>
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
         {showSuggestions && (
